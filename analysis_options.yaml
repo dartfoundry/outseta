@@ -1,0 +1,73 @@
+# This file configures the static analysis results for your project (errors,
+# warnings, and lints).
+
+include: package:lints/recommended.yaml
+
+# Additional rules for stricter analysis
+linter:
+  rules:
+    # Error rules
+    - avoid_empty_else
+    - avoid_relative_lib_imports
+    - avoid_returning_null_for_future
+    - avoid_types_as_parameter_names
+    - no_duplicate_case_values
+    - unrelated_type_equality_checks
+    - valid_regexps
+
+    # Style rules
+    - always_declare_return_types
+    - always_require_non_null_named_parameters
+    - annotate_overrides
+    - avoid_function_literals_in_foreach_calls
+    - avoid_init_to_null
+    - avoid_null_checks_in_equality_operators
+    - avoid_renaming_method_parameters
+    - avoid_return_types_on_setters
+    - avoid_single_cascade_in_expression_statements
+    - constant_identifier_names
+    - curly_braces_in_flow_control_structures
+    - empty_constructor_bodies
+    - empty_statements
+    - exhaustive_cases
+    - implementation_imports
+    - library_names
+    - library_prefixes
+    - non_constant_identifier_names
+    - null_closures
+    - overridden_fields
+    - package_names
+    - prefer_adjacent_string_concatenation
+    - prefer_collection_literals
+    - prefer_conditional_assignment
+    - prefer_contains
+    - prefer_final_fields
+    - prefer_for_elements_to_map_fromIterable
+    - prefer_generic_function_type_aliases
+    - prefer_if_null_operators
+    - prefer_interpolation_to_compose_strings
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - prefer_iterable_whereType
+    - prefer_single_quotes
+    - prefer_spread_collections
+    - recursive_getters
+    - slash_for_doc_comments
+    - type_init_formals
+    - unnecessary_brace_in_string_interps
+    - unnecessary_const
+    - unnecessary_new
+    - unnecessary_null_in_if_null_operators
+    - unnecessary_this
+    - use_function_type_syntax_for_parameters
+    - use_rethrow_when_possible
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "lib/src/generated/**"
+  errors:
+    missing_required_param: error
+    missing_return: error
+    unused_import: warning
+    unused_local_variable: warning

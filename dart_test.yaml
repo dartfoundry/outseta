@@ -1,0 +1,14 @@
+name: outseta
+platforms: [vm]
+timeout: 60s
+
+coverage_ignores:
+  - "lib/src/auth/auth.dart:63-82"  # getAuthToken function - requires network connections
+  - "lib/src/generated/**"  # Auto-generated code
+  - "**/*.g.dart"           # Auto-generated code
+
+coverage:
+  filter:
+    - "lib/**"
+    - "-lib/src/generated/**"
+    - "-**/*.g.dart"

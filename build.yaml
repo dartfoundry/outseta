@@ -1,0 +1,22 @@
+# Configure the JSON serialization generation
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          # Options for the json_serializable builder
+          explicit_to_json: true
+          include_if_null: false
+          field_rename: snake
+          checked: true
+          create_to_json: true
+          create_factory: true
+      
+      # Ensure that the generated part files use the .g.dart extension
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+          - unnecessary_this
+          - sort_constructors_first
+          - prefer_single_quotes
+          - lines_longer_than_80_chars
