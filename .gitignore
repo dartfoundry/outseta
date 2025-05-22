@@ -8,3 +8,6 @@ pubspec.lock
 
 # Ignore generated code
 coverage/
+
+# Ignore macOS specific files
+.DS_Store
