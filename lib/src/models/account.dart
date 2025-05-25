@@ -32,7 +32,8 @@ class Account extends BaseModelWithMetadata {
   });
 
   /// Factory constructor that creates an [Account] from JSON data
-  factory Account.fromJson(Map<String, dynamic> json) => _$AccountFromJson(json);
+  factory Account.fromJson(Map<String, dynamic> json) =>
+      _$AccountFromJson(json);
 
   /// The account name or company name
   @JsonKey(name: 'Name')
@@ -129,18 +130,18 @@ class Account extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        name,
-        billingAddress,
-        mailingAddress,
-        phoneNumber,
-        subscriptions,
-        people,
-        primaryContact,
-        clientIdentifier,
-        dealUid,
-        planUid,
-        cancellationReason,
-        customFields,
-      ];
+    ...super.props,
+    name,
+    billingAddress,
+    mailingAddress,
+    phoneNumber,
+    subscriptions,
+    people,
+    primaryContact,
+    clientIdentifier,
+    dealUid,
+    planUid,
+    cancellationReason,
+    customFields,
+  ];
 }

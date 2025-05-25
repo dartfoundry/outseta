@@ -34,16 +34,10 @@ void main() {
           'City': 'San Francisco',
           'State': 'CA',
           'PostalCode': '94105',
-          'Country': 'USA'
+          'Country': 'USA',
         },
-        'PersonAccount': {
-          'AccountUid': 'account-456',
-          'Name': 'Acme Inc'
-        },
-        'DemographicInfo': {
-          'Age': 35,
-          'Gender': 'Female'
-        }
+        'PersonAccount': {'AccountUid': 'account-456', 'Name': 'Acme Inc'},
+        'DemographicInfo': {'Age': 35, 'Gender': 'Female'},
       };
 
       // Act
@@ -67,17 +61,20 @@ void main() {
       expect(person.billingInvoiceEmail, isTrue);
       expect(person.communicationEmail, isTrue);
       expect(person.marketingEmail, isTrue);
-      expect(person.customFields, equals({'department': 'Executive', 'employeeId': '1001'}));
+      expect(
+        person.customFields,
+        equals({'department': 'Executive', 'employeeId': '1001'}),
+      );
       expect(person.created, isA<DateTime>());
       expect(person.updated, isA<DateTime>());
       expect(person.createdBy, equals('admin'));
       expect(person.updatedBy, equals('admin'));
-      
+
       // Check nested objects
       expect(person.mailingAddress, isNotNull);
       expect(person.mailingAddress?.addressLine1, equals('123 Main St'));
       expect(person.mailingAddress?.city, equals('San Francisco'));
-      
+
       expect(person.personAccount, isNotNull);
       expect(person.demographicInfo, isNotNull);
     });
@@ -117,14 +114,8 @@ void main() {
           postalCode: '94105',
           country: 'USA',
         ),
-        personAccount: {
-          'AccountUid': 'account-456',
-          'Name': 'Acme Inc'
-        },
-        demographicInfo: {
-          'Age': 35,
-          'Gender': 'Female'
-        },
+        personAccount: {'AccountUid': 'account-456', 'Name': 'Acme Inc'},
+        demographicInfo: {'Age': 35, 'Gender': 'Female'},
       );
 
       // Act
@@ -150,12 +141,15 @@ void main() {
       expect(json['BillingInvoiceEmail'], isTrue);
       expect(json['CommunicationEmail'], isTrue);
       expect(json['MarketingEmail'], isTrue);
-      expect(json['CustomFields'], equals({'department': 'Executive', 'employeeId': '1001'}));
+      expect(
+        json['CustomFields'],
+        equals({'department': 'Executive', 'employeeId': '1001'}),
+      );
       expect(json['Created'], isA<String>());
       expect(json['Updated'], isA<String>());
       expect(json['CreatedBy'], equals('admin'));
       expect(json['UpdatedBy'], equals('admin'));
-      
+
       // Check nested objects
       expect(json['MailingAddress'], isNotNull);
       expect(json['MailingAddress']['AddressLine1'], equals('123 Main St'));
@@ -191,8 +185,11 @@ void main() {
       expect(updatedPerson.lastName, equals('Doe')); // Unchanged
       expect(updatedPerson.title, equals('Director')); // Changed
       expect(updatedPerson.phoneNumber, equals('555-987-6543')); // Added
-      expect(updatedPerson.mailingAddress?.addressLine1, equals('789 New Ave')); // Added
-      
+      expect(
+        updatedPerson.mailingAddress?.addressLine1,
+        equals('789 New Ave'),
+      ); // Added
+
       // Verify original is unchanged
       expect(person.firstName, equals('Jane'));
       expect(person.title, equals('Manager'));
@@ -208,14 +205,14 @@ void main() {
         firstName: 'Jane',
         lastName: 'Doe',
       );
-      
+
       final person2 = Person(
         uid: 'person-123',
         email: 'jane.doe@example.com',
         firstName: 'Jane',
         lastName: 'Doe',
       );
-      
+
       final person3 = Person(
         uid: 'person-123',
         email: 'jane.doe@example.com',
@@ -225,8 +222,11 @@ void main() {
 
       // Assert
       expect(person1 == person2, isTrue); // Same values should be equal
-      expect(person1 == person3, isFalse); // Different values should not be equal
-      
+      expect(
+        person1 == person3,
+        isFalse,
+      ); // Different values should not be equal
+
       // Check props content
       expect(person1.props, contains(person1.uid));
       expect(person1.props, contains(person1.email));
@@ -270,7 +270,7 @@ void main() {
       expect(person.marketingEmail, isNull);
       expect(person.customFields, isNull);
     });
-    
+
     test('should handle special cases with password fields', () {
       // Arrange
       final person = Person(
@@ -279,22 +279,22 @@ void main() {
         password: 'securePassword',
         confirmPassword: 'securePassword',
       );
-      
+
       // Act
       final json = person.toJson();
       // Password fields should be included in JSON for API calls
-      
+
       // Assert
       expect(json['Password'], equals('securePassword'));
       expect(json['ConfirmPassword'], equals('securePassword'));
-      
+
       // When deserializing, password fields are not included in the response
       final responseJson = {
         'Uid': 'person-123',
         'Email': 'jane.doe@example.com',
         // No password fields
       };
-      
+
       final deserializedPerson = Person.fromJson(responseJson);
       expect(deserializedPerson.password, isNull);
       expect(deserializedPerson.confirmPassword, isNull);

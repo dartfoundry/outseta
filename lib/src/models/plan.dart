@@ -118,7 +118,9 @@ class Plan extends BaseModelWithMetadata {
       trialPeriodDays: trialPeriodDays ?? this.trialPeriodDays,
       isActive: isActive ?? this.isActive,
       isFree: isFree ?? this.isFree,
-      recurringChargeAgreementRequired: recurringChargeAgreementRequired ?? this.recurringChargeAgreementRequired,
+      recurringChargeAgreementRequired:
+          recurringChargeAgreementRequired ??
+          this.recurringChargeAgreementRequired,
       planAddOns: planAddOns ?? this.planAddOns,
       customFields: customFields ?? this.customFields,
     );
@@ -126,18 +128,18 @@ class Plan extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        name,
-        description,
-        billingTerm,
-        billingTermCount,
-        amount,
-        setupFee,
-        trialPeriodDays,
-        isActive,
-        isFree,
-        recurringChargeAgreementRequired,
-        planAddOns,
-        customFields,
-      ];
+    ...super.props,
+    name,
+    description,
+    billingTerm,
+    billingTermCount,
+    amount,
+    setupFee,
+    trialPeriodDays,
+    isActive,
+    isFree,
+    recurringChargeAgreementRequired,
+    planAddOns,
+    customFields,
+  ];
 }

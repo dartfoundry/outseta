@@ -278,12 +278,7 @@ void main() {
   group('Pagination', () {
     test('fromJson should correctly parse JSON', () {
       // Arrange
-      final json = {
-        'count': 10,
-        'limit': 25,
-        'offset': 0,
-        'total': 100,
-      };
+      final json = {'count': 10, 'limit': 25, 'offset': 0, 'total': 100};
 
       // Act
       final pagination = Pagination.fromJson(json);

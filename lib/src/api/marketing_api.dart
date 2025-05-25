@@ -19,14 +19,22 @@ class MarketingApi {
     int limit = 25,
     String? filter,
   }) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
-    final response = await _client.get('marketing/lists', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => EmailList.fromJson(item)).toList();
+    final response = await _client.get(
+      'marketing/lists',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => EmailList.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<EmailList>(items: items, metadata: metadata);
@@ -50,7 +58,10 @@ class MarketingApi {
       throw ArgumentError('List uid cannot be null');
     }
 
-    final response = await _client.put('marketing/lists/${list.uid}', body: list.toJson());
+    final response = await _client.put(
+      'marketing/lists/${list.uid}',
+      body: list.toJson(),
+    );
     return EmailList.fromJson(response);
   }
 
@@ -68,14 +79,22 @@ class MarketingApi {
     int limit = 25,
     String? filter,
   }) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
-    final response = await _client.get('marketing/lists/$listUid/people', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Person.fromJson(item)).toList();
+    final response = await _client.get(
+      'marketing/lists/$listUid/people',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Person.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Person>(items: items, metadata: metadata);
@@ -99,14 +118,22 @@ class MarketingApi {
     int limit = 25,
     String? filter,
   }) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
-    final response = await _client.get('marketing/emails', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Email.fromJson(item)).toList();
+    final response = await _client.get(
+      'marketing/emails',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Email.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Email>(items: items, metadata: metadata);
@@ -120,7 +147,10 @@ class MarketingApi {
 
   /// Create a new email campaign
   Future<Email> createEmail(Email email) async {
-    final response = await _client.post('marketing/emails', body: email.toJson());
+    final response = await _client.post(
+      'marketing/emails',
+      body: email.toJson(),
+    );
     return Email.fromJson(response);
   }
 
@@ -130,7 +160,10 @@ class MarketingApi {
       throw ArgumentError('Email uid cannot be null');
     }
 
-    final response = await _client.put('marketing/emails/${email.uid}', body: email.toJson());
+    final response = await _client.put(
+      'marketing/emails/${email.uid}',
+      body: email.toJson(),
+    );
     return Email.fromJson(response);
   }
 

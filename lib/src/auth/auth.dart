@@ -14,10 +14,7 @@ class ApiKeyAuth implements OutsetaAuth {
   ///
   /// [apiKey] - The API key from Outseta (Settings > Integrations > API Keys)
   /// [secretKey] - The secret key from Outseta
-  ApiKeyAuth({
-    required this.apiKey,
-    required this.secretKey,
-  });
+  ApiKeyAuth({required this.apiKey, required this.secretKey});
 
   /// The API key from Outseta
   final String apiKey;
@@ -27,9 +24,7 @@ class ApiKeyAuth implements OutsetaAuth {
 
   @override
   Future<Map<String, String>> getHeaders() async {
-    return {
-      'Authorization': 'Outseta $apiKey:$secretKey',
-    };
+    return {'Authorization': 'Outseta $apiKey:$secretKey'};
   }
 }
 
@@ -38,18 +33,14 @@ class BearerTokenAuth implements OutsetaAuth {
   /// Creates a new bearer token authentication method
   ///
   /// [accessToken] - The access token from Outseta
-  BearerTokenAuth({
-    required this.accessToken,
-  });
+  BearerTokenAuth({required this.accessToken});
 
   /// The access token from Outseta
   final String accessToken;
 
   @override
   Future<Map<String, String>> getHeaders() async {
-    return {
-      'Authorization': 'bearer $accessToken',
-    };
+    return {'Authorization': 'bearer $accessToken'};
   }
 }
 
@@ -69,17 +60,16 @@ Future<String> getAuthToken({
     final response = await client.post(
       Uri.parse('$baseUrl/tokens'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'username': username,
-        'password': password,
-      }),
+      body: jsonEncode({'username': username, 'password': password}),
     );
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
       return data['access_token'];
     } else {
-      throw Exception('Failed to get authentication token: ${response.statusCode}');
+      throw Exception(
+        'Failed to get authentication token: ${response.statusCode}',
+      );
     }
   } finally {
     client.close();

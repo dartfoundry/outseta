@@ -84,7 +84,10 @@ void main() {
       final deserializedMetadata = Metadata.fromJson(json);
 
       // Assert
-      expect(deserializedMetadata.created, equals(DateTime.parse('2023-01-01T00:00:00Z')));
+      expect(
+        deserializedMetadata.created,
+        equals(DateTime.parse('2023-01-01T00:00:00Z')),
+      );
       expect(deserializedMetadata.createdBy, equals('admin'));
       expect(deserializedMetadata.updated, isNull);
       expect(deserializedMetadata.updatedBy, isNull);

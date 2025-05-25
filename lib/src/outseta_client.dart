@@ -21,9 +21,11 @@ class OutsetaClient {
     required String baseUrl,
     required OutsetaAuth auth,
     http.Client? httpClient,
-  })  : _baseUrl = baseUrl.endsWith('/') ? baseUrl.substring(0, baseUrl.length - 1) : baseUrl,
-        _auth = auth,
-        _httpClient = httpClient ?? http.Client() {
+  }) : _baseUrl = baseUrl.endsWith('/')
+           ? baseUrl.substring(0, baseUrl.length - 1)
+           : baseUrl,
+       _auth = auth,
+       _httpClient = httpClient ?? http.Client() {
     _initializeApiModules();
   }
 
@@ -55,8 +57,13 @@ class OutsetaClient {
   }
 
   /// Makes a GET request to the Outseta API
-  Future<Map<String, dynamic>> get(String path, {Map<String, String>? queryParams}) async {
-    final uri = Uri.parse('$_baseUrl/$path').replace(queryParameters: queryParams);
+  Future<Map<String, dynamic>> get(
+    String path, {
+    Map<String, String>? queryParams,
+  }) async {
+    final uri = Uri.parse(
+      '$_baseUrl/$path',
+    ).replace(queryParameters: queryParams);
     final response = await _httpClient.get(
       uri,
       headers: await _auth.getHeaders(),
@@ -105,12 +112,16 @@ class OutsetaClient {
   /// Handle API response and error cases
   Map<String, dynamic> _handleResponse(http.Response response) {
     final statusCode = response.statusCode;
-    final responseBody = response.body.isNotEmpty ? jsonDecode(response.body) : null;
+    final responseBody = response.body.isNotEmpty
+        ? jsonDecode(response.body)
+        : null;
 
     if (statusCode >= 200 && statusCode < 300) {
       return responseBody ?? {};
     } else {
-      final errorMessage = responseBody is Map ? responseBody['error']?.toString() ?? 'Unknown error' : 'Unknown error';
+      final errorMessage = responseBody is Map
+          ? responseBody['error']?.toString() ?? 'Unknown error'
+          : 'Unknown error';
       switch (statusCode) {
         case 400:
           throw BadRequestException(errorMessage);

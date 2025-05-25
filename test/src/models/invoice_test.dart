@@ -17,17 +17,14 @@ void main() {
           {
             'Description': 'Monthly subscription',
             'Amount': 99.99,
-            'Quantity': 1
-          }
+            'Quantity': 1,
+          },
         ],
         'Created': '2023-01-01T00:00:00Z',
         'Updated': '2023-01-02T00:00:00Z',
         'CreatedBy': 'admin',
         'UpdatedBy': 'admin',
-        'Account': {
-          'Uid': 'account-456',
-          'Name': 'Test Company',
-        },
+        'Account': {'Uid': 'account-456', 'Name': 'Test Company'},
       };
 
       // Act
@@ -43,7 +40,10 @@ void main() {
       expect(invoice.paidDate, isNull);
       expect(invoice.invoiceItems, isNotNull);
       expect(invoice.invoiceItems?.length, equals(1));
-      expect(invoice.invoiceItems?[0]['Description'], equals('Monthly subscription'));
+      expect(
+        invoice.invoiceItems?[0]['Description'],
+        equals('Monthly subscription'),
+      );
       expect(invoice.created, isA<DateTime>());
       expect(invoice.updated, isA<DateTime>());
       expect(invoice.createdBy, equals('admin'));
@@ -66,17 +66,14 @@ void main() {
           {
             'Description': 'Monthly subscription',
             'Amount': 99.99,
-            'Quantity': 1
-          }
+            'Quantity': 1,
+          },
         ],
         created: DateTime.parse('2023-01-01T00:00:00Z'),
         updated: DateTime.parse('2023-01-02T00:00:00Z'),
         createdBy: 'admin',
         updatedBy: 'admin',
-        account: Account(
-          uid: 'account-456',
-          name: 'Test Company',
-        ),
+        account: Account(uid: 'account-456', name: 'Test Company'),
       );
 
       // Act
@@ -123,7 +120,7 @@ void main() {
       expect(updatedInvoice.status, equals('Paid')); // Changed
       expect(updatedInvoice.paidDate, isA<DateTime>()); // Added
       expect(updatedInvoice.amount, equals(149.99)); // Changed
-      
+
       // Verify original is unchanged
       expect(invoice.status, equals('Unpaid'));
       expect(invoice.paidDate, isNull);
@@ -139,7 +136,7 @@ void main() {
         amount: 99.99,
         status: 'Unpaid',
       );
-      
+
       final invoice2 = Invoice(
         uid: 'inv-123',
         invoiceNumber: 'INV-123',
@@ -147,7 +144,7 @@ void main() {
         amount: 99.99,
         status: 'Unpaid',
       );
-      
+
       final invoice3 = Invoice(
         uid: 'inv-123',
         invoiceNumber: 'INV-123',
@@ -158,8 +155,11 @@ void main() {
 
       // Assert
       expect(invoice1 == invoice2, isTrue); // Same values should be equal
-      expect(invoice1 == invoice3, isFalse); // Different values should not be equal
-      
+      expect(
+        invoice1 == invoice3,
+        isFalse,
+      ); // Different values should not be equal
+
       // Check props content
       expect(invoice1.props, contains(invoice1.uid));
       expect(invoice1.props, contains(invoice1.invoiceNumber));
@@ -190,11 +190,11 @@ void main() {
       expect(invoice.invoiceItems, isNull);
       expect(invoice.account, isNull);
     });
-    
+
     test('should handle different status values', () {
       // Test various status values
       final statuses = ['Unpaid', 'Paid', 'Void', 'Refunded', 'Overdue'];
-      
+
       for (final status in statuses) {
         // Arrange
         final invoice = Invoice(
@@ -202,11 +202,11 @@ void main() {
           invoiceNumber: 'INV-123',
           status: status,
         );
-        
+
         // Act
         final json = invoice.toJson();
         final deserialized = Invoice.fromJson(json);
-        
+
         // Assert
         expect(deserialized.status, equals(status));
       }

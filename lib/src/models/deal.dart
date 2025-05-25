@@ -149,21 +149,21 @@ class Deal extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        name,
-        amount,
-        stage,
-        stageUid,
-        dealPipelineUid,
-        accountUid,
-        account,
-        personUid,
-        person,
-        assignedToPersonUid,
-        assignedToPerson,
-        closeDate,
-        dealLostReason,
-        description,
-        customFields,
-      ];
+    ...super.props,
+    name,
+    amount,
+    stage,
+    stageUid,
+    dealPipelineUid,
+    accountUid,
+    account,
+    personUid,
+    person,
+    assignedToPersonUid,
+    assignedToPerson,
+    closeDate,
+    dealLostReason,
+    description,
+    customFields,
+  ];
 }

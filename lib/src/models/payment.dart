@@ -33,7 +33,8 @@ class Payment extends BaseModelWithMetadata {
   });
 
   /// Factory constructor that creates a [Payment] from JSON data
-  factory Payment.fromJson(Map<String, dynamic> json) => _$PaymentFromJson(json);
+  factory Payment.fromJson(Map<String, dynamic> json) =>
+      _$PaymentFromJson(json);
 
   /// The UID of the account associated with this payment
   @JsonKey(name: 'AccountUid')
@@ -142,20 +143,20 @@ class Payment extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        accountUid,
-        account,
-        amount,
-        paymentDate,
-        paymentMethod,
-        stripePaymentId,
-        stripeRefundId,
-        refundAmount,
-        refundDate,
-        status,
-        invoiceUid,
-        invoice,
-        note,
-        customFields,
-      ];
+    ...super.props,
+    accountUid,
+    account,
+    amount,
+    paymentDate,
+    paymentMethod,
+    stripePaymentId,
+    stripeRefundId,
+    refundAmount,
+    refundDate,
+    status,
+    invoiceUid,
+    invoice,
+    note,
+    customFields,
+  ];
 }

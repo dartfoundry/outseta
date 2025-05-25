@@ -19,14 +19,19 @@ class CrmApi {
     int limit = 25,
     String? filter,
   }) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
     final response = await _client.get('crm/people', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Person.fromJson(item)).toList();
+    final items = (response['items'] as List)
+        .map((item) => Person.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Person>(items: items, metadata: metadata);
@@ -50,7 +55,10 @@ class CrmApi {
       throw ArgumentError('Person uid cannot be null');
     }
 
-    final response = await _client.put('crm/people/${person.uid}', body: person.toJson());
+    final response = await _client.put(
+      'crm/people/${person.uid}',
+      body: person.toJson(),
+    );
     return Person.fromJson(response);
   }
 
@@ -67,14 +75,22 @@ class CrmApi {
     int limit = 25,
     String? filter,
   }) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
-    final response = await _client.get('crm/accounts', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Account.fromJson(item)).toList();
+    final response = await _client.get(
+      'crm/accounts',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Account.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Account>(items: items, metadata: metadata);
@@ -98,7 +114,10 @@ class CrmApi {
       throw ArgumentError('Account uid cannot be null');
     }
 
-    final response = await _client.put('crm/accounts/${account.uid}', body: account.toJson());
+    final response = await _client.put(
+      'crm/accounts/${account.uid}',
+      body: account.toJson(),
+    );
     return Account.fromJson(response);
   }
 
@@ -113,22 +132,34 @@ class CrmApi {
   }
 
   /// Remove a person from an account
-  Future<void> removePersonFromAccount(String accountUid, String personUid) async {
+  Future<void> removePersonFromAccount(
+    String accountUid,
+    String personUid,
+  ) async {
     await _client.post('crm/accounts/$accountUid/remove-person/$personUid');
   }
 
   // Deals endpoints
 
   /// Get a paginated list of deals
-  Future<PaginatedResponse<Deal>> getDeals({int offset = 0, int limit = 25, String? filter}) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+  Future<PaginatedResponse<Deal>> getDeals({
+    int offset = 0,
+    int limit = 25,
+    String? filter,
+  }) async {
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
     final response = await _client.get('crm/deals', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Deal.fromJson(item)).toList();
+    final items = (response['items'] as List)
+        .map((item) => Deal.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Deal>(items: items, metadata: metadata);
@@ -152,7 +183,10 @@ class CrmApi {
       throw ArgumentError('Deal uid cannot be null');
     }
 
-    final response = await _client.put('crm/deals/${deal.uid}', body: deal.toJson());
+    final response = await _client.put(
+      'crm/deals/${deal.uid}',
+      body: deal.toJson(),
+    );
     return Deal.fromJson(response);
   }
 

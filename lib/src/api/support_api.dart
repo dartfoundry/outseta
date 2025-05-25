@@ -17,14 +17,22 @@ class SupportApi {
     int limit = 25,
     String? filter,
   }) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
-    final response = await _client.get('support/tickets', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Ticket.fromJson(item)).toList();
+    final response = await _client.get(
+      'support/tickets',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Ticket.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Ticket>(items: items, metadata: metadata);
@@ -38,7 +46,10 @@ class SupportApi {
 
   /// Create a new support ticket
   Future<Ticket> createTicket(Ticket ticket) async {
-    final response = await _client.post('support/tickets', body: ticket.toJson());
+    final response = await _client.post(
+      'support/tickets',
+      body: ticket.toJson(),
+    );
     return Ticket.fromJson(response);
   }
 
@@ -48,7 +59,10 @@ class SupportApi {
       throw ArgumentError('Ticket uid cannot be null');
     }
 
-    final response = await _client.put('support/tickets/${ticket.uid}', body: ticket.toJson());
+    final response = await _client.put(
+      'support/tickets/${ticket.uid}',
+      body: ticket.toJson(),
+    );
     return Ticket.fromJson(response);
   }
 
@@ -58,7 +72,11 @@ class SupportApi {
   }
 
   /// Add a comment to a support ticket
-  Future<Ticket> addComment(String ticketUid, String comment, {bool isPrivate = false}) async {
+  Future<Ticket> addComment(
+    String ticketUid,
+    String comment, {
+    bool isPrivate = false,
+  }) async {
     final response = await _client.post(
       'support/tickets/$ticketUid/comments',
       body: {'Comment': comment, 'IsPrivate': isPrivate},
@@ -96,8 +114,13 @@ class SupportApi {
       'filter': 'AssignedToPersonUid eq $personUid',
     };
 
-    final response = await _client.get('support/tickets', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Ticket.fromJson(item)).toList();
+    final response = await _client.get(
+      'support/tickets',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Ticket.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Ticket>(items: items, metadata: metadata);
@@ -115,8 +138,13 @@ class SupportApi {
       'filter': 'CreatedBy eq $personUid',
     };
 
-    final response = await _client.get('support/tickets', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Ticket.fromJson(item)).toList();
+    final response = await _client.get(
+      'support/tickets',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Ticket.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Ticket>(items: items, metadata: metadata);

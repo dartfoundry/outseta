@@ -40,7 +40,8 @@ class Subscription extends BaseModelWithMetadata {
   });
 
   /// Factory constructor that creates a [Subscription] from JSON data
-  factory Subscription.fromJson(Map<String, dynamic> json) => _$SubscriptionFromJson(json);
+  factory Subscription.fromJson(Map<String, dynamic> json) =>
+      _$SubscriptionFromJson(json);
 
   /// The billing renewal term (e.g., 'Month', 'Year')
   @JsonKey(name: 'BillingRenewalTerm')
@@ -197,28 +198,28 @@ class Subscription extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        billingRenewalTerm,
-        plan,
-        planUid,
-        accountUid,
-        personUid,
-        startDate,
-        endDate,
-        cancelDate,
-        billingStart,
-        billingEnd,
-        cancellationReason,
-        quantity,
-        amount,
-        setupFee,
-        discount,
-        taxAmount,
-        total,
-        status,
-        subscriptionAddOns,
-        paymentMethod,
-        planName,
-        customFields,
-      ];
+    ...super.props,
+    billingRenewalTerm,
+    plan,
+    planUid,
+    accountUid,
+    personUid,
+    startDate,
+    endDate,
+    cancelDate,
+    billingStart,
+    billingEnd,
+    cancellationReason,
+    quantity,
+    amount,
+    setupFee,
+    discount,
+    taxAmount,
+    total,
+    status,
+    subscriptionAddOns,
+    paymentMethod,
+    planName,
+    customFields,
+  ];
 }

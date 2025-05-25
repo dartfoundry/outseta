@@ -6,13 +6,18 @@ void main() {
     group('ApiKeyAuth', () {
       test('should return correct headers', () async {
         // Arrange
-        final auth = ApiKeyAuth(apiKey: 'test-api-key', secretKey: 'test-secret-key');
+        final auth = ApiKeyAuth(
+          apiKey: 'test-api-key',
+          secretKey: 'test-secret-key',
+        );
 
         // Act
         final headers = await auth.getHeaders();
 
         // Assert
-        expect(headers, {'Authorization': 'Outseta test-api-key:test-secret-key'});
+        expect(headers, {
+          'Authorization': 'Outseta test-api-key:test-secret-key',
+        });
       });
 
       test('should handle empty api key and secret', () async {
@@ -28,13 +33,18 @@ void main() {
 
       test('should handle whitespace in keys', () async {
         // Arrange
-        final auth = ApiKeyAuth(apiKey: ' test-api-key ', secretKey: ' test-secret-key ');
+        final auth = ApiKeyAuth(
+          apiKey: ' test-api-key ',
+          secretKey: ' test-secret-key ',
+        );
 
         // Act
         final headers = await auth.getHeaders();
 
         // Assert
-        expect(headers, {'Authorization': 'Outseta  test-api-key : test-secret-key '});
+        expect(headers, {
+          'Authorization': 'Outseta  test-api-key : test-secret-key ',
+        });
       });
     });
 
@@ -72,43 +82,49 @@ void main() {
         expect(headers, {'Authorization': 'bearer  test-token '});
       });
 
-      test('should include token in headers even if token is invalid', () async {
-        // Arrange
-        final auth = BearerTokenAuth(accessToken: 'invalid.token.format');
+      test(
+        'should include token in headers even if token is invalid',
+        () async {
+          // Arrange
+          final auth = BearerTokenAuth(accessToken: 'invalid.token.format');
 
-        // Act
-        final headers = await auth.getHeaders();
+          // Act
+          final headers = await auth.getHeaders();
 
-        // Assert
-        expect(headers, {'Authorization': 'bearer invalid.token.format'});
-      });
+          // Assert
+          expect(headers, {'Authorization': 'bearer invalid.token.format'});
+        },
+      );
     });
 
     group('OutsetaAuth Abstract Class', () {
       test('should be properly implemented by concrete classes', () async {
         // Arrange
-        final apiKeyAuth = ApiKeyAuth(apiKey: 'test-api-key', secretKey: 'test-secret-key');
+        final apiKeyAuth = ApiKeyAuth(
+          apiKey: 'test-api-key',
+          secretKey: 'test-secret-key',
+        );
         final bearerAuth = BearerTokenAuth(accessToken: 'test-token');
-        
+
         // Act & Assert
         expect(apiKeyAuth, isA<OutsetaAuth>());
         expect(bearerAuth, isA<OutsetaAuth>());
-        
+
         // Both should implement getHeaders() method
         expect(await apiKeyAuth.getHeaders(), isA<Map<String, String>>());
         expect(await bearerAuth.getHeaders(), isA<Map<String, String>>());
       });
     });
   });
-  
+
   // Note: We're not testing getAuthToken() directly because:
   // 1. It would require actual network connections to Outseta's API
-  // 2. It's difficult to mock the HTTP client creation without significantly 
+  // 2. It's difficult to mock the HTTP client creation without significantly
   //    changing the function's implementation
   // 3. The function is relatively simple and primarily relies on the HTTP client
   //
   // In a real-world scenario, this function would typically be used in an integration
-  // test rather than a unit test, or would be refactored to make the HTTP client 
+  // test rather than a unit test, or would be refactored to make the HTTP client
   // more easily injectable for testing purposes.
   //
   // This test file has been consolidated from multiple separate files to improve

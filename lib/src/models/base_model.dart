@@ -46,10 +46,10 @@ abstract class BaseModelWithMetadata extends BaseModel {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        created,
-        updated,
-        createdBy,
-        updatedBy,
-      ];
+    ...super.props,
+    created,
+    updated,
+    createdBy,
+    updatedBy,
+  ];
 }

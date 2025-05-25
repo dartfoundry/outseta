@@ -33,7 +33,8 @@ class Invoice extends BaseModelWithMetadata {
   });
 
   /// Factory constructor that creates an [Invoice] from JSON data
-  factory Invoice.fromJson(Map<String, dynamic> json) => _$InvoiceFromJson(json);
+  factory Invoice.fromJson(Map<String, dynamic> json) =>
+      _$InvoiceFromJson(json);
 
   /// The invoice number
   @JsonKey(name: 'InvoiceNumber')
@@ -148,21 +149,21 @@ class Invoice extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        invoiceNumber,
-        accountUid,
-        account,
-        dueDate,
-        amount,
-        taxAmount,
-        discount,
-        total,
-        billingPeriodStart,
-        billingPeriodEnd,
-        paidDate,
-        paymentMethodUid,
-        status,
-        invoiceItems,
-        customFields,
-      ];
+    ...super.props,
+    invoiceNumber,
+    accountUid,
+    account,
+    dueDate,
+    amount,
+    taxAmount,
+    discount,
+    total,
+    billingPeriodStart,
+    billingPeriodEnd,
+    paidDate,
+    paymentMethodUid,
+    status,
+    invoiceItems,
+    customFields,
+  ];
 }

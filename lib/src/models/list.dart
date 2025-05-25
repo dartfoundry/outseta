@@ -21,7 +21,8 @@ class EmailList extends BaseModelWithMetadata {
   });
 
   /// Factory constructor that creates an [EmailList] from JSON data
-  factory EmailList.fromJson(Map<String, dynamic> json) => _$EmailListFromJson(json);
+  factory EmailList.fromJson(Map<String, dynamic> json) =>
+      _$EmailListFromJson(json);
 
   /// The name of the email list
   @JsonKey(name: 'Name')
@@ -70,10 +71,10 @@ class EmailList extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        name,
-        description,
-        subscriberCount,
-        customFields,
-      ];
+    ...super.props,
+    name,
+    description,
+    subscriberCount,
+    customFields,
+  ];
 }

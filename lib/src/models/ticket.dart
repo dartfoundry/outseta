@@ -127,18 +127,18 @@ class Ticket extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        subject,
-        description,
-        status,
-        priority,
-        requesterPersonUid,
-        requesterPerson,
-        assignedToPersonUid,
-        assignedToPerson,
-        comments,
-        accountUid,
-        source,
-        customFields,
-      ];
+    ...super.props,
+    subject,
+    description,
+    status,
+    priority,
+    requesterPersonUid,
+    requesterPerson,
+    assignedToPersonUid,
+    assignedToPerson,
+    comments,
+    accountUid,
+    source,
+    customFields,
+  ];
 }

@@ -2,7 +2,7 @@
 ///
 /// This library provides a type-safe interface to the Outseta REST API,
 /// allowing you to interact with CRM, Billing, Marketing, and Support functions.
-library outseta;
+library;
 
 // Core client exports
 export 'src/outseta_client.dart';

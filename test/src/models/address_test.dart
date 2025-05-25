@@ -83,7 +83,7 @@ void main() {
       expect(updatedAddress.state, equals('CA')); // Unchanged
       expect(updatedAddress.postalCode, equals('94105')); // Unchanged
       expect(updatedAddress.country, equals('USA')); // Unchanged
-      
+
       // Verify original is unchanged
       expect(address.addressLine1, equals('123 Main St'));
       expect(address.addressLine2, isNull);
@@ -98,14 +98,14 @@ void main() {
         city: 'San Francisco',
         state: 'CA',
       );
-      
+
       final address2 = Address(
         uid: 'addr-123',
         addressLine1: '123 Main St',
         city: 'San Francisco',
         state: 'CA',
       );
-      
+
       final address3 = Address(
         uid: 'addr-123',
         addressLine1: '456 Market St', // Different
@@ -115,8 +115,11 @@ void main() {
 
       // Assert
       expect(address1 == address2, isTrue); // Same values should be equal
-      expect(address1 == address3, isFalse); // Different values should not be equal
-      
+      expect(
+        address1 == address3,
+        isFalse,
+      ); // Different values should not be equal
+
       // Check props content
       expect(address1.props, contains(address1.uid));
       expect(address1.props, contains(address1.addressLine1));

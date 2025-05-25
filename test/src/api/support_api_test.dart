@@ -35,21 +35,19 @@ void main() {
             'Description': 'I need help with my subscription',
             'Status': 'Open',
             'Priority': 'Medium',
-          }
+          },
         ],
-        'metadata': {
-          'count': 1,
-          'limit': 25,
-          'offset': 0,
-          'total': 1,
-        },
+        'metadata': {'count': 1, 'limit': 25, 'offset': 0, 'total': 1},
       };
-      
-      when(mockClient.get(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets')
-            .replace(queryParameters: {'offset': '0', 'limit': '25'}),
-        headers: anyNamed('headers'),
-      )).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
+
+      when(
+        mockClient.get(
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/support/tickets',
+          ).replace(queryParameters: {'offset': '0', 'limit': '25'}),
+          headers: anyNamed('headers'),
+        ),
+      ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
 
       // Act
       final result = await supportApi.getTickets();
@@ -72,11 +70,15 @@ void main() {
         'Priority': 'Medium',
         'RequesterPersonUid': '456',
       };
-      
-      when(mockClient.get(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets/123'),
-        headers: anyNamed('headers'),
-      )).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
+
+      when(
+        mockClient.get(
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/support/tickets/123',
+          ),
+          headers: anyNamed('headers'),
+        ),
+      ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
 
       // Act
       final result = await supportApi.getTicket('123');
@@ -96,7 +98,7 @@ void main() {
         description: 'This is a test ticket',
         priority: 'High',
       );
-      
+
       final responseData = {
         'Uid': '456',
         'Subject': 'New Support Request',
@@ -104,12 +106,14 @@ void main() {
         'Status': 'Open',
         'Priority': 'High',
       };
-      
-      when(mockClient.post(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets'),
-        headers: anyNamed('headers'),
-        body: anyNamed('body'),
-      )).thenAnswer((_) async => http.Response(jsonEncode(responseData), 201));
+
+      when(
+        mockClient.post(
+          Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets'),
+          headers: anyNamed('headers'),
+          body: anyNamed('body'),
+        ),
+      ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 201));
 
       // Act
       final result = await supportApi.createTicket(ticket);
@@ -131,7 +135,7 @@ void main() {
         priority: 'Low',
         status: 'In Progress',
       );
-      
+
       final responseData = {
         'Uid': '123',
         'Subject': 'Updated Support Request',
@@ -139,12 +143,16 @@ void main() {
         'Status': 'In Progress',
         'Priority': 'Low',
       };
-      
-      when(mockClient.put(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets/123'),
-        headers: anyNamed('headers'),
-        body: anyNamed('body'),
-      )).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
+
+      when(
+        mockClient.put(
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/support/tickets/123',
+          ),
+          headers: anyNamed('headers'),
+          body: anyNamed('body'),
+        ),
+      ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
 
       // Act
       final result = await supportApi.updateTicket(ticket);
@@ -158,19 +166,27 @@ void main() {
 
     test('deleteTicket should delete a ticket', () async {
       // Arrange
-      when(mockClient.delete(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets/123'),
-        headers: anyNamed('headers'),
-      )).thenAnswer((_) async => http.Response('', 204));
+      when(
+        mockClient.delete(
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/support/tickets/123',
+          ),
+          headers: anyNamed('headers'),
+        ),
+      ).thenAnswer((_) async => http.Response('', 204));
 
       // Act
       await supportApi.deleteTicket('123');
 
       // Assert
-      verify(mockClient.delete(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets/123'),
-        headers: anyNamed('headers'),
-      )).called(1);
+      verify(
+        mockClient.delete(
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/support/tickets/123',
+          ),
+          headers: anyNamed('headers'),
+        ),
+      ).called(1);
     });
 
     test('addComment should add a comment to a ticket', () async {
@@ -180,28 +196,39 @@ void main() {
         'Subject': 'Help with subscription',
         'Status': 'Open',
         'Comments': [
-          {
-            'Comment': 'This is a test comment',
-            'IsPrivate': true,
-          }
+          {'Comment': 'This is a test comment', 'IsPrivate': true},
         ],
       };
-      
-      when(mockClient.post(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets/123/comments'),
-        headers: anyNamed('headers'),
-        body: jsonEncode({'Comment': 'This is a test comment', 'IsPrivate': true}),
-      )).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
+
+      when(
+        mockClient.post(
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/support/tickets/123/comments',
+          ),
+          headers: anyNamed('headers'),
+          body: jsonEncode({
+            'Comment': 'This is a test comment',
+            'IsPrivate': true,
+          }),
+        ),
+      ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
 
       // Act
-      final result = await supportApi.addComment('123', 'This is a test comment', isPrivate: true);
+      final result = await supportApi.addComment(
+        '123',
+        'This is a test comment',
+        isPrivate: true,
+      );
 
       // Assert
       expect(result.uid, equals('123'));
       expect(result.subject, equals('Help with subscription'));
       expect(result.comments, isNotNull);
       expect(result.comments?.length, equals(1));
-      expect(result.comments?.first['Comment'], equals('This is a test comment'));
+      expect(
+        result.comments?.first['Comment'],
+        equals('This is a test comment'),
+      );
       expect(result.comments?.first['IsPrivate'], isTrue);
     });
 
@@ -212,12 +239,16 @@ void main() {
         'Subject': 'Help with subscription',
         'Status': 'In Progress',
       };
-      
-      when(mockClient.post(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets/123/change-status'),
-        headers: anyNamed('headers'),
-        body: jsonEncode({'Status': 'In Progress'}),
-      )).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
+
+      when(
+        mockClient.post(
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/support/tickets/123/change-status',
+          ),
+          headers: anyNamed('headers'),
+          body: jsonEncode({'Status': 'In Progress'}),
+        ),
+      ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
 
       // Act
       final result = await supportApi.changeStatus('123', 'In Progress');
@@ -236,12 +267,16 @@ void main() {
         'Status': 'Open',
         'AssignedToPersonUid': '456',
       };
-      
-      when(mockClient.post(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets/123/assign'),
-        headers: anyNamed('headers'),
-        body: jsonEncode({'PersonUid': '456'}),
-      )).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
+
+      when(
+        mockClient.post(
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/support/tickets/123/assign',
+          ),
+          headers: anyNamed('headers'),
+          body: jsonEncode({'PersonUid': '456'}),
+        ),
+      ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
 
       // Act
       final result = await supportApi.assignTicket('123', '456');
@@ -252,74 +287,94 @@ void main() {
       expect(result.assignedToPersonUid, equals('456'));
     });
 
-    test('getTicketsAssignedToPerson should return tickets assigned to a person', () async {
-      // Arrange
-      final responseData = {
-        'items': [
-          {
-            'Uid': '123',
-            'Subject': 'Help with subscription',
-            'Status': 'Open',
-            'AssignedToPersonUid': '456',
-          }
-        ],
-        'metadata': {
-          'count': 1,
-          'limit': 10,
-          'offset': 0,
-          'total': 1,
-        },
-      };
-      
-      when(mockClient.get(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets')
-            .replace(queryParameters: {'offset': '0', 'limit': '10', 'filter': 'AssignedToPersonUid eq 456'}),
-        headers: anyNamed('headers'),
-      )).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
+    test(
+      'getTicketsAssignedToPerson should return tickets assigned to a person',
+      () async {
+        // Arrange
+        final responseData = {
+          'items': [
+            {
+              'Uid': '123',
+              'Subject': 'Help with subscription',
+              'Status': 'Open',
+              'AssignedToPersonUid': '456',
+            },
+          ],
+          'metadata': {'count': 1, 'limit': 10, 'offset': 0, 'total': 1},
+        };
 
-      // Act
-      final result = await supportApi.getTicketsAssignedToPerson('456', limit: 10);
+        when(
+          mockClient.get(
+            Uri.parse(
+              'https://test-domain.outseta.com/api/v1/support/tickets',
+            ).replace(
+              queryParameters: {
+                'offset': '0',
+                'limit': '10',
+                'filter': 'AssignedToPersonUid eq 456',
+              },
+            ),
+            headers: anyNamed('headers'),
+          ),
+        ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
 
-      // Assert
-      expect(result.items.length, equals(1));
-      expect(result.items.first.subject, equals('Help with subscription'));
-      expect(result.items.first.assignedToPersonUid, equals('456'));
-      expect(result.metadata.total, equals(1));
-    });
+        // Act
+        final result = await supportApi.getTicketsAssignedToPerson(
+          '456',
+          limit: 10,
+        );
 
-    test('getTicketsSubmittedByPerson should return tickets submitted by a person', () async {
-      // Arrange
-      final responseData = {
-        'items': [
-          {
-            'Uid': '123',
-            'Subject': 'Help with subscription',
-            'Status': 'Open',
-            'RequesterPersonUid': '456',
-          }
-        ],
-        'metadata': {
-          'count': 1,
-          'limit': 10,
-          'offset': 0,
-          'total': 1,
-        },
-      };
-      
-      when(mockClient.get(
-        Uri.parse('https://test-domain.outseta.com/api/v1/support/tickets')
-            .replace(queryParameters: {'offset': '0', 'limit': '10', 'filter': 'CreatedBy eq 456'}),
-        headers: anyNamed('headers'),
-      )).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
+        // Assert
+        expect(result.items.length, equals(1));
+        expect(result.items.first.subject, equals('Help with subscription'));
+        expect(result.items.first.assignedToPersonUid, equals('456'));
+        expect(result.metadata.total, equals(1));
+      },
+    );
 
-      // Act
-      final result = await supportApi.getTicketsSubmittedByPerson('456', limit: 10);
+    test(
+      'getTicketsSubmittedByPerson should return tickets submitted by a person',
+      () async {
+        // Arrange
+        final responseData = {
+          'items': [
+            {
+              'Uid': '123',
+              'Subject': 'Help with subscription',
+              'Status': 'Open',
+              'RequesterPersonUid': '456',
+            },
+          ],
+          'metadata': {'count': 1, 'limit': 10, 'offset': 0, 'total': 1},
+        };
 
-      // Assert
-      expect(result.items.length, equals(1));
-      expect(result.items.first.subject, equals('Help with subscription'));
-      expect(result.items.first.requesterPersonUid, equals('456'));
-      expect(result.metadata.total, equals(1));
-    });
+        when(
+          mockClient.get(
+            Uri.parse(
+              'https://test-domain.outseta.com/api/v1/support/tickets',
+            ).replace(
+              queryParameters: {
+                'offset': '0',
+                'limit': '10',
+                'filter': 'CreatedBy eq 456',
+              },
+            ),
+            headers: anyNamed('headers'),
+          ),
+        ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
+
+        // Act
+        final result = await supportApi.getTicketsSubmittedByPerson(
+          '456',
+          limit: 10,
+        );
+
+        // Assert
+        expect(result.items.length, equals(1));
+        expect(result.items.first.subject, equals('Help with subscription'));
+        expect(result.items.first.requesterPersonUid, equals('456'));
+        expect(result.metadata.total, equals(1));
+      },
+    );
   });
 }

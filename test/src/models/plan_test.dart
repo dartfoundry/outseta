@@ -18,10 +18,7 @@ void main() {
         'IsFree': false,
         'RecurringChargeAgreementRequired': true,
         'PlanAddOns': [
-          {
-            'Name': 'Extra Storage',
-            'Amount': 9.99
-          }
+          {'Name': 'Extra Storage', 'Amount': 9.99},
         ],
         'CustomFields': {'category': 'business'},
         'Created': '2023-01-01T00:00:00Z',
@@ -36,7 +33,10 @@ void main() {
       // Assert
       expect(plan.uid, equals('plan-123'));
       expect(plan.name, equals('Pro Plan'));
-      expect(plan.description, equals('Professional tier with advanced features'));
+      expect(
+        plan.description,
+        equals('Professional tier with advanced features'),
+      );
       expect(plan.billingTerm, equals('Month'));
       expect(plan.billingTermCount, equals(1));
       expect(plan.amount, equals(99.99));
@@ -70,10 +70,7 @@ void main() {
         isFree: false,
         recurringChargeAgreementRequired: true,
         planAddOns: [
-          {
-            'Name': 'Extra Storage',
-            'Amount': 9.99
-          }
+          {'Name': 'Extra Storage', 'Amount': 9.99},
         ],
         customFields: {'category': 'business'},
         created: DateTime.parse('2023-01-01T00:00:00Z'),
@@ -88,7 +85,10 @@ void main() {
       // Assert
       expect(json['Uid'], equals('plan-123'));
       expect(json['Name'], equals('Pro Plan'));
-      expect(json['Description'], equals('Professional tier with advanced features'));
+      expect(
+        json['Description'],
+        equals('Professional tier with advanced features'),
+      );
       expect(json['BillingTerm'], equals('Month'));
       expect(json['BillingTermCount'], equals(1));
       expect(json['Amount'], equals(99.99));
@@ -129,10 +129,13 @@ void main() {
       expect(updatedPlan.billingTerm, equals('Month')); // Unchanged
       expect(updatedPlan.isActive, isTrue); // Unchanged
       expect(updatedPlan.name, equals('Premium Plan')); // Changed
-      expect(updatedPlan.description, equals('Premium features added')); // Added
+      expect(
+        updatedPlan.description,
+        equals('Premium features added'),
+      ); // Added
       expect(updatedPlan.amount, equals(79.99)); // Changed
       expect(updatedPlan.setupFee, equals(29.99)); // Added
-      
+
       // Verify original is unchanged
       expect(plan.name, equals('Basic Plan'));
       expect(plan.description, isNull);
@@ -148,14 +151,14 @@ void main() {
         billingTerm: 'Month',
         amount: 49.99,
       );
-      
+
       final plan2 = Plan(
         uid: 'plan-123',
         name: 'Basic Plan',
         billingTerm: 'Month',
         amount: 49.99,
       );
-      
+
       final plan3 = Plan(
         uid: 'plan-123',
         name: 'Basic Plan',
@@ -166,7 +169,7 @@ void main() {
       // Assert
       expect(plan1 == plan2, isTrue); // Same values should be equal
       expect(plan1 == plan3, isFalse); // Different values should not be equal
-      
+
       // Check props content
       expect(plan1.props, contains(plan1.uid));
       expect(plan1.props, contains(plan1.name));
@@ -200,11 +203,11 @@ void main() {
       expect(plan.planAddOns, isNull);
       expect(plan.customFields, isNull);
     });
-    
+
     test('should handle different billing terms', () {
       // Test various billing terms
       final terms = ['Month', 'Year', 'Week', 'Day'];
-      
+
       for (final term in terms) {
         // Arrange
         final plan = Plan(
@@ -212,11 +215,11 @@ void main() {
           name: 'Test Plan',
           billingTerm: term,
         );
-        
+
         // Act
         final json = plan.toJson();
         final deserialized = Plan.fromJson(json);
-        
+
         // Assert
         expect(deserialized.billingTerm, equals(term));
       }

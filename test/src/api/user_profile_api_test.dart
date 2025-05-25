@@ -94,7 +94,9 @@ void main() {
       // Arrange
       when(
         mockClient.post(
-          Uri.parse('https://test-domain.outseta.com/api/v1/profile/user/change-password'),
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/profile/user/change-password',
+          ),
           headers: anyNamed('headers'),
           body: jsonEncode({
             'CurrentPassword': 'old-password',
@@ -105,12 +107,18 @@ void main() {
       ).thenAnswer((_) async => http.Response('', 200));
 
       // Act
-      await userProfileApi.changePassword('old-password', 'new-password', 'new-password');
+      await userProfileApi.changePassword(
+        'old-password',
+        'new-password',
+        'new-password',
+      );
 
       // Assert
       verify(
         mockClient.post(
-          Uri.parse('https://test-domain.outseta.com/api/v1/profile/user/change-password'),
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/profile/user/change-password',
+          ),
           headers: anyNamed('headers'),
           body: jsonEncode({
             'CurrentPassword': 'old-password',
@@ -125,7 +133,9 @@ void main() {
       // Arrange
       when(
         mockClient.post(
-          Uri.parse('https://test-domain.outseta.com/api/v1/profile/user/request-password-reset'),
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/profile/user/request-password-reset',
+          ),
           headers: anyNamed('headers'),
           body: jsonEncode({'Email': 'test@example.com'}),
         ),
@@ -137,7 +147,9 @@ void main() {
       // Assert
       verify(
         mockClient.post(
-          Uri.parse('https://test-domain.outseta.com/api/v1/profile/user/request-password-reset'),
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/profile/user/request-password-reset',
+          ),
           headers: anyNamed('headers'),
           body: jsonEncode({'Email': 'test@example.com'}),
         ),
@@ -148,7 +160,9 @@ void main() {
       // Arrange
       when(
         mockClient.post(
-          Uri.parse('https://test-domain.outseta.com/api/v1/profile/user/reset-password'),
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/profile/user/reset-password',
+          ),
           headers: anyNamed('headers'),
           body: jsonEncode({
             'Token': 'reset-token',
@@ -159,12 +173,18 @@ void main() {
       ).thenAnswer((_) async => http.Response('', 200));
 
       // Act
-      await userProfileApi.resetPassword('reset-token', 'new-password', 'new-password');
+      await userProfileApi.resetPassword(
+        'reset-token',
+        'new-password',
+        'new-password',
+      );
 
       // Assert
       verify(
         mockClient.post(
-          Uri.parse('https://test-domain.outseta.com/api/v1/profile/user/reset-password'),
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/profile/user/reset-password',
+          ),
           headers: anyNamed('headers'),
           body: jsonEncode({
             'Token': 'reset-token',
@@ -187,12 +207,18 @@ void main() {
         mockClient.post(
           Uri.parse('https://test-domain.outseta.com/api/v1/tokens'),
           headers: anyNamed('headers'),
-          body: jsonEncode({'username': 'test@example.com', 'password': 'password123'}),
+          body: jsonEncode({
+            'username': 'test@example.com',
+            'password': 'password123',
+          }),
         ),
       ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
 
       // Act
-      final result = await userProfileApi.getAccessToken('test@example.com', 'password123');
+      final result = await userProfileApi.getAccessToken(
+        'test@example.com',
+        'password123',
+      );
 
       // Assert
       expect(result, equals('test-access-token'));
@@ -202,7 +228,9 @@ void main() {
       // Arrange
       when(
         mockClient.post(
-          Uri.parse('https://test-domain.outseta.com/api/v1/profile/user/verify-email'),
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/profile/user/verify-email',
+          ),
           headers: anyNamed('headers'),
           body: jsonEncode({'Token': 'verification-token'}),
         ),
@@ -214,7 +242,9 @@ void main() {
       // Assert
       verify(
         mockClient.post(
-          Uri.parse('https://test-domain.outseta.com/api/v1/profile/user/verify-email'),
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/profile/user/verify-email',
+          ),
           headers: anyNamed('headers'),
           body: jsonEncode({'Token': 'verification-token'}),
         ),
@@ -261,7 +291,9 @@ void main() {
 
       when(
         mockClient.post(
-          Uri.parse('https://test-domain.outseta.com/api/v1/profile/user/update-profile-picture'),
+          Uri.parse(
+            'https://test-domain.outseta.com/api/v1/profile/user/update-profile-picture',
+          ),
           headers: anyNamed('headers'),
           body: jsonEncode({'ProfileImage': base64Image}),
         ),

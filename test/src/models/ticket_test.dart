@@ -38,7 +38,7 @@ void main() {
             'IsPrivate': false,
             'PersonUid': 'person-456',
             'Created': '2023-01-02T00:00:00Z',
-          }
+          },
         ],
       };
 
@@ -55,7 +55,10 @@ void main() {
       expect(ticket.assignedToPersonUid, equals('person-789'));
       expect(ticket.accountUid, equals('account-012'));
       expect(ticket.source, equals('Email'));
-      expect(ticket.customFields, equals({'category': 'billing', 'importance': 'high'}));
+      expect(
+        ticket.customFields,
+        equals({'category': 'billing', 'importance': 'high'}),
+      );
       expect(ticket.created, isA<DateTime>());
       expect(ticket.updated, isA<DateTime>());
       expect(ticket.createdBy, equals('admin'));
@@ -104,7 +107,7 @@ void main() {
             'IsPrivate': false,
             'PersonUid': 'person-456',
             'Created': '2023-01-02T00:00:00Z',
-          }
+          },
         ],
       );
 
@@ -121,7 +124,10 @@ void main() {
       expect(json['AssignedToPersonUid'], equals('person-789'));
       expect(json['AccountUid'], equals('account-012'));
       expect(json['Source'], equals('Email'));
-      expect(json['CustomFields'], equals({'category': 'billing', 'importance': 'high'}));
+      expect(
+        json['CustomFields'],
+        equals({'category': 'billing', 'importance': 'high'}),
+      );
       expect(json['Created'], isA<String>());
       expect(json['Updated'], isA<String>());
       expect(json['CreatedBy'], equals('admin'));
@@ -151,12 +157,18 @@ void main() {
 
       // Assert
       expect(updatedTicket.uid, equals('ticket-123')); // Unchanged
-      expect(updatedTicket.subject, equals('Help with subscription')); // Unchanged
-      expect(updatedTicket.requesterPersonUid, equals('person-456')); // Unchanged
+      expect(
+        updatedTicket.subject,
+        equals('Help with subscription'),
+      ); // Unchanged
+      expect(
+        updatedTicket.requesterPersonUid,
+        equals('person-456'),
+      ); // Unchanged
       expect(updatedTicket.status, equals('In Progress')); // Changed
       expect(updatedTicket.priority, equals('High')); // Changed
       expect(updatedTicket.assignedToPersonUid, equals('person-789')); // Added
-      
+
       // Verify original is unchanged
       expect(ticket.status, equals('Open'));
       expect(ticket.priority, equals('Medium'));
@@ -171,14 +183,14 @@ void main() {
         status: 'Open',
         priority: 'Medium',
       );
-      
+
       final ticket2 = Ticket(
         uid: 'ticket-123',
         subject: 'Help with subscription',
         status: 'Open',
         priority: 'Medium',
       );
-      
+
       final ticket3 = Ticket(
         uid: 'ticket-123',
         subject: 'Help with subscription',
@@ -188,8 +200,11 @@ void main() {
 
       // Assert
       expect(ticket1 == ticket2, isTrue); // Same values should be equal
-      expect(ticket1 == ticket3, isFalse); // Different values should not be equal
-      
+      expect(
+        ticket1 == ticket3,
+        isFalse,
+      ); // Different values should not be equal
+
       // Check props content
       expect(ticket1.props, contains(ticket1.uid));
       expect(ticket1.props, contains(ticket1.subject));
@@ -223,11 +238,17 @@ void main() {
       expect(ticket.assignedToPerson, isNull);
       expect(ticket.comments, isNull);
     });
-    
+
     test('should handle different status values', () {
       // Test various status values
-      final statuses = ['Open', 'In Progress', 'Resolved', 'Closed', 'Waiting on Customer'];
-      
+      final statuses = [
+        'Open',
+        'In Progress',
+        'Resolved',
+        'Closed',
+        'Waiting on Customer',
+      ];
+
       for (final status in statuses) {
         // Arrange
         final ticket = Ticket(
@@ -235,20 +256,20 @@ void main() {
           subject: 'Help with subscription',
           status: status,
         );
-        
+
         // Act
         final json = ticket.toJson();
         final deserialized = Ticket.fromJson(json);
-        
+
         // Assert
         expect(deserialized.status, equals(status));
       }
     });
-    
+
     test('should handle different priority values', () {
       // Test various priority values
       final priorities = ['Low', 'Medium', 'High', 'Urgent'];
-      
+
       for (final priority in priorities) {
         // Arrange
         final ticket = Ticket(
@@ -256,11 +277,11 @@ void main() {
           subject: 'Help with subscription',
           priority: priority,
         );
-        
+
         // Act
         final json = ticket.toJson();
         final deserialized = Ticket.fromJson(json);
-        
+
         // Assert
         expect(deserialized.priority, equals(priority));
       }

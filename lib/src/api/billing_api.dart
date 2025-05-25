@@ -15,15 +15,27 @@ class BillingApi {
   // Plans endpoints
 
   /// Get a paginated list of plans
-  Future<PaginatedResponse<Plan>> getPlans({int offset = 0, int limit = 25, String? filter}) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+  Future<PaginatedResponse<Plan>> getPlans({
+    int offset = 0,
+    int limit = 25,
+    String? filter,
+  }) async {
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
-    final response = await _client.get('billing/plans', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Plan.fromJson(item)).toList();
+    final response = await _client.get(
+      'billing/plans',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Plan.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Plan>(items: items, metadata: metadata);
@@ -47,7 +59,10 @@ class BillingApi {
       throw ArgumentError('Plan uid cannot be null');
     }
 
-    final response = await _client.put('billing/plans/${plan.uid}', body: plan.toJson());
+    final response = await _client.put(
+      'billing/plans/${plan.uid}',
+      body: plan.toJson(),
+    );
     return Plan.fromJson(response);
   }
 
@@ -64,14 +79,22 @@ class BillingApi {
     int limit = 25,
     String? filter,
   }) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
-    final response = await _client.get('billing/subscriptions', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Subscription.fromJson(item)).toList();
+    final response = await _client.get(
+      'billing/subscriptions',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Subscription.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Subscription>(items: items, metadata: metadata);
@@ -85,7 +108,10 @@ class BillingApi {
 
   /// Create a new subscription
   Future<Subscription> createSubscription(Subscription subscription) async {
-    final response = await _client.post('billing/subscriptions', body: subscription.toJson());
+    final response = await _client.post(
+      'billing/subscriptions',
+      body: subscription.toJson(),
+    );
     return Subscription.fromJson(response);
   }
 
@@ -103,9 +129,17 @@ class BillingApi {
   }
 
   /// Cancel a subscription
-  Future<Subscription> cancelSubscription(String uid, {String? cancellationReason}) async {
-    final body = cancellationReason != null ? {'CancellationReason': cancellationReason} : null;
-    final response = await _client.post('billing/subscriptions/$uid/cancel', body: body);
+  Future<Subscription> cancelSubscription(
+    String uid, {
+    String? cancellationReason,
+  }) async {
+    final body = cancellationReason != null
+        ? {'CancellationReason': cancellationReason}
+        : null;
+    final response = await _client.post(
+      'billing/subscriptions/$uid/cancel',
+      body: body,
+    );
     return Subscription.fromJson(response);
   }
 
@@ -117,14 +151,22 @@ class BillingApi {
     int limit = 25,
     String? filter,
   }) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
-    final response = await _client.get('billing/invoices', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Invoice.fromJson(item)).toList();
+    final response = await _client.get(
+      'billing/invoices',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Invoice.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Invoice>(items: items, metadata: metadata);
@@ -138,7 +180,10 @@ class BillingApi {
 
   /// Create a new invoice
   Future<Invoice> createInvoice(Invoice invoice) async {
-    final response = await _client.post('billing/invoices', body: invoice.toJson());
+    final response = await _client.post(
+      'billing/invoices',
+      body: invoice.toJson(),
+    );
     return Invoice.fromJson(response);
   }
 
@@ -148,7 +193,10 @@ class BillingApi {
       throw ArgumentError('Invoice uid cannot be null');
     }
 
-    final response = await _client.put('billing/invoices/${invoice.uid}', body: invoice.toJson());
+    final response = await _client.put(
+      'billing/invoices/${invoice.uid}',
+      body: invoice.toJson(),
+    );
     return Invoice.fromJson(response);
   }
 
@@ -166,14 +214,22 @@ class BillingApi {
     int limit = 25,
     String? filter,
   }) async {
-    final queryParams = {'offset': offset.toString(), 'limit': limit.toString()};
+    final queryParams = {
+      'offset': offset.toString(),
+      'limit': limit.toString(),
+    };
 
     if (filter != null) {
       queryParams['filter'] = filter;
     }
 
-    final response = await _client.get('billing/payments', queryParams: queryParams);
-    final items = (response['items'] as List).map((item) => Payment.fromJson(item)).toList();
+    final response = await _client.get(
+      'billing/payments',
+      queryParams: queryParams,
+    );
+    final items = (response['items'] as List)
+        .map((item) => Payment.fromJson(item))
+        .toList();
     final metadata = Pagination.fromJson(response['metadata']);
 
     return PaginatedResponse<Payment>(items: items, metadata: metadata);
@@ -187,14 +243,20 @@ class BillingApi {
 
   /// Create a new payment
   Future<Payment> createPayment(Payment payment) async {
-    final response = await _client.post('billing/payments', body: payment.toJson());
+    final response = await _client.post(
+      'billing/payments',
+      body: payment.toJson(),
+    );
     return Payment.fromJson(response);
   }
 
   /// Refund a payment
   Future<Payment> refundPayment(String uid, {double? amount}) async {
     final body = amount != null ? {'Amount': amount} : null;
-    final response = await _client.post('billing/payments/$uid/refund', body: body);
+    final response = await _client.post(
+      'billing/payments/$uid/refund',
+      body: body,
+    );
     return Payment.fromJson(response);
   }
 }

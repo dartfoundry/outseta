@@ -6,15 +6,11 @@ part 'metadata.g.dart';
 @JsonSerializable()
 class Metadata {
   /// Creates a new metadata instance
-  const Metadata({
-    this.created,
-    this.updated,
-    this.createdBy,
-    this.updatedBy,
-  });
+  const Metadata({this.created, this.updated, this.createdBy, this.updatedBy});
 
   /// Factory constructor that creates a [Metadata] from JSON data
-  factory Metadata.fromJson(Map<String, dynamic> json) => _$MetadataFromJson(json);
+  factory Metadata.fromJson(Map<String, dynamic> json) =>
+      _$MetadataFromJson(json);
 
   /// The date and time the resource was created
   @JsonKey(name: 'Created')

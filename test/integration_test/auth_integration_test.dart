@@ -25,7 +25,11 @@ void main() {
   group('Auth Integration Tests', () {
     test('getAuthToken returns valid token', () async {
       // Act
-      final token = await getAuthToken(baseUrl: baseUrl, username: username, password: password);
+      final token = await getAuthToken(
+        baseUrl: baseUrl,
+        username: username,
+        password: password,
+      );
 
       // Assert
       expect(token, isNotEmpty);

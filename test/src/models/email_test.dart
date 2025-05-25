@@ -40,7 +40,10 @@ void main() {
       expect(email.fromName, equals('Company Name'));
       expect(email.fromEmail, equals('newsletter@example.com'));
       expect(email.replyToEmail, equals('support@example.com'));
-      expect(email.content, equals('<h1>Newsletter</h1><p>This is the newsletter content.</p>'));
+      expect(
+        email.content,
+        equals('<h1>Newsletter</h1><p>This is the newsletter content.</p>'),
+      );
       expect(email.status, equals('Draft'));
       expect(email.scheduledDate, isA<DateTime>());
       expect(email.sentDate, isNull);
@@ -95,7 +98,10 @@ void main() {
       expect(json['FromName'], equals('Company Name'));
       expect(json['FromEmail'], equals('newsletter@example.com'));
       expect(json['ReplyToEmail'], equals('support@example.com'));
-      expect(json['Content'], equals('<h1>Newsletter</h1><p>This is the newsletter content.</p>'));
+      expect(
+        json['Content'],
+        equals('<h1>Newsletter</h1><p>This is the newsletter content.</p>'),
+      );
       expect(json['Status'], equals('Draft'));
       expect(json['ScheduledDate'], isA<String>());
       expect(json['SentDate'], isNull);
@@ -132,9 +138,15 @@ void main() {
       expect(updatedEmail.uid, equals('email-123')); // Unchanged
       expect(updatedEmail.subject, equals('Updated Newsletter')); // Changed
       expect(updatedEmail.status, equals('Scheduled')); // Changed
-      expect(updatedEmail.scheduledDate, equals(DateTime.parse('2023-01-15T10:00:00Z'))); // Unchanged
-      expect(updatedEmail.sentDate, equals(DateTime.parse('2023-01-15T12:00:00Z'))); // Added
-      
+      expect(
+        updatedEmail.scheduledDate,
+        equals(DateTime.parse('2023-01-15T10:00:00Z')),
+      ); // Unchanged
+      expect(
+        updatedEmail.sentDate,
+        equals(DateTime.parse('2023-01-15T12:00:00Z')),
+      ); // Added
+
       // Verify original is unchanged
       expect(email.subject, equals('Monthly Newsletter'));
       expect(email.status, equals('Draft'));
@@ -148,13 +160,13 @@ void main() {
         subject: 'Monthly Newsletter',
         status: 'Draft',
       );
-      
+
       final email2 = Email(
         uid: 'email-123',
         subject: 'Monthly Newsletter',
         status: 'Draft',
       );
-      
+
       final email3 = Email(
         uid: 'email-123',
         subject: 'Different Newsletter', // Different
@@ -164,7 +176,7 @@ void main() {
       // Assert
       expect(email1 == email2, isTrue); // Same values should be equal
       expect(email1 == email3, isFalse); // Different values should not be equal
-      
+
       // Check props content
       expect(email1.props, contains(email1.uid));
       expect(email1.props, contains(email1.subject));
@@ -199,11 +211,11 @@ void main() {
       expect(email.customFields, isNull);
       expect(email.emailList, isNull);
     });
-    
+
     test('should handle different status values', () {
       // Test various status values
       final statuses = ['Draft', 'Scheduled', 'Sending', 'Sent', 'Failed'];
-      
+
       for (final status in statuses) {
         // Arrange
         final email = Email(
@@ -211,11 +223,11 @@ void main() {
           subject: 'Monthly Newsletter',
           status: status,
         );
-        
+
         // Act
         final json = email.toJson();
         final deserialized = Email.fromJson(json);
-        
+
         // Assert
         expect(deserialized.status, equals(status));
       }

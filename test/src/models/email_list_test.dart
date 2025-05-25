@@ -23,9 +23,15 @@ void main() {
       // Assert
       expect(emailList.uid, equals('list-123'));
       expect(emailList.name, equals('Newsletter Subscribers'));
-      expect(emailList.description, equals('People who want to receive our newsletter'));
+      expect(
+        emailList.description,
+        equals('People who want to receive our newsletter'),
+      );
       expect(emailList.subscriberCount, equals(1250));
-      expect(emailList.customFields, equals({'category': 'marketing', 'isActive': true}));
+      expect(
+        emailList.customFields,
+        equals({'category': 'marketing', 'isActive': true}),
+      );
       expect(emailList.created, isA<DateTime>());
       expect(emailList.updated, isA<DateTime>());
       expect(emailList.createdBy, equals('admin'));
@@ -52,9 +58,15 @@ void main() {
       // Assert
       expect(json['Uid'], equals('list-123'));
       expect(json['Name'], equals('Newsletter Subscribers'));
-      expect(json['Description'], equals('People who want to receive our newsletter'));
+      expect(
+        json['Description'],
+        equals('People who want to receive our newsletter'),
+      );
       expect(json['SubscriberCount'], equals(1250));
-      expect(json['CustomFields'], equals({'category': 'marketing', 'isActive': true}));
+      expect(
+        json['CustomFields'],
+        equals({'category': 'marketing', 'isActive': true}),
+      );
       expect(json['Created'], isA<String>());
       expect(json['Updated'], isA<String>());
       expect(json['CreatedBy'], equals('admin'));
@@ -79,11 +91,14 @@ void main() {
 
       // Assert
       expect(updatedEmailList.uid, equals('list-123')); // Unchanged
-      expect(updatedEmailList.description, equals('People who want to receive our newsletter')); // Unchanged
+      expect(
+        updatedEmailList.description,
+        equals('People who want to receive our newsletter'),
+      ); // Unchanged
       expect(updatedEmailList.name, equals('VIP Subscribers')); // Changed
       expect(updatedEmailList.subscriberCount, equals(500)); // Changed
       expect(updatedEmailList.customFields, equals({'type': 'vip'})); // Added
-      
+
       // Verify original is unchanged
       expect(emailList.name, equals('Newsletter Subscribers'));
       expect(emailList.subscriberCount, equals(1250));
@@ -97,13 +112,13 @@ void main() {
         name: 'Newsletter Subscribers',
         subscriberCount: 1250,
       );
-      
+
       final emailList2 = EmailList(
         uid: 'list-123',
         name: 'Newsletter Subscribers',
         subscriberCount: 1250,
       );
-      
+
       final emailList3 = EmailList(
         uid: 'list-123',
         name: 'Newsletter Subscribers',
@@ -112,8 +127,11 @@ void main() {
 
       // Assert
       expect(emailList1 == emailList2, isTrue); // Same values should be equal
-      expect(emailList1 == emailList3, isFalse); // Different values should not be equal
-      
+      expect(
+        emailList1 == emailList3,
+        isFalse,
+      ); // Different values should not be equal
+
       // Check props content
       expect(emailList1.props, contains(emailList1.uid));
       expect(emailList1.props, contains(emailList1.name));
@@ -142,7 +160,7 @@ void main() {
       expect(emailList.createdBy, isNull);
       expect(emailList.updatedBy, isNull);
     });
-    
+
     test('should handle empty subscriber count', () {
       // Arrange
       final emailList = EmailList(
@@ -150,11 +168,11 @@ void main() {
         name: 'New List',
         subscriberCount: 0,
       );
-      
+
       // Act
       final json = emailList.toJson();
       final deserialized = EmailList.fromJson(json);
-      
+
       // Assert
       expect(deserialized.subscriberCount, equals(0));
     });

@@ -83,10 +83,7 @@ void main() {
       );
 
       // Act
-      final updatedDeal = deal.copyWith(
-        name: 'Updated Deal',
-        amount: 6000.0,
-      );
+      final updatedDeal = deal.copyWith(name: 'Updated Deal', amount: 6000.0);
 
       // Assert
       expect(updatedDeal.uid, equals('123'));
@@ -118,7 +115,10 @@ void main() {
       // Assert
       expect(list.uid, equals('123'));
       expect(list.name, equals('Newsletter Subscribers'));
-      expect(list.description, equals('People who want to receive our newsletter'));
+      expect(
+        list.description,
+        equals('People who want to receive our newsletter'),
+      );
       expect(list.subscriberCount, equals(42));
       expect(list.created, isA<DateTime>());
       expect(list.updated, isA<DateTime>());
@@ -145,7 +145,10 @@ void main() {
       // Assert
       expect(json['Uid'], equals('123'));
       expect(json['Name'], equals('Newsletter Subscribers'));
-      expect(json['Description'], equals('People who want to receive our newsletter'));
+      expect(
+        json['Description'],
+        equals('People who want to receive our newsletter'),
+      );
       expect(json['SubscriberCount'], equals(42));
       expect(json['Created'], isA<String>());
       expect(json['Updated'], isA<String>());
@@ -341,7 +344,7 @@ void main() {
             'IsPrivate': false,
             'PersonUid': '456',
             'Created': '2023-01-02T00:00:00Z',
-          }
+          },
         ],
       };
 
@@ -381,7 +384,7 @@ void main() {
             'IsPrivate': false,
             'PersonUid': '456',
             'Created': '2023-01-02T00:00:00Z',
-          }
+          },
         ],
       );
 

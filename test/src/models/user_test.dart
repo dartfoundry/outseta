@@ -47,7 +47,10 @@ void main() {
       expect(user.lastLoggedInDate, isA<DateTime>());
       expect(user.isAdmin, isFalse);
       expect(user.marketingConsent, isTrue);
-      expect(user.customFields, equals({'department': 'Sales', 'employeeId': '12345'}));
+      expect(
+        user.customFields,
+        equals({'department': 'Sales', 'employeeId': '12345'}),
+      );
       expect(user.created, isA<DateTime>());
       expect(user.updated, isA<DateTime>());
       expect(user.createdBy, equals('admin'));
@@ -106,7 +109,10 @@ void main() {
       expect(json['Password'], equals('securePassword'));
       expect(json['ConfirmPassword'], equals('securePassword'));
       expect(json['MarketingConsent'], isTrue);
-      expect(json['CustomFields'], equals({'department': 'Sales', 'employeeId': '12345'}));
+      expect(
+        json['CustomFields'],
+        equals({'department': 'Sales', 'employeeId': '12345'}),
+      );
       expect(json['Created'], isA<String>());
       expect(json['Updated'], isA<String>());
       expect(json['CreatedBy'], equals('admin'));
@@ -140,7 +146,7 @@ void main() {
       expect(updatedUser.lastName, equals('Smith')); // Changed
       expect(updatedUser.phoneNumber, equals('555-987-6543')); // Added
       expect(updatedUser.isAdmin, isTrue); // Added
-      
+
       // Verify original is unchanged
       expect(user.firstName, equals('John'));
       expect(user.lastName, equals('Doe'));
@@ -157,7 +163,7 @@ void main() {
         firstName: 'John',
         lastName: 'Doe',
       );
-      
+
       final user2 = User(
         uid: 'user-123',
         username: 'johndoe',
@@ -165,7 +171,7 @@ void main() {
         firstName: 'John',
         lastName: 'Doe',
       );
-      
+
       final user3 = User(
         uid: 'user-123',
         username: 'johndoe',
@@ -177,7 +183,7 @@ void main() {
       // Assert
       expect(user1 == user2, isTrue); // Same values should be equal
       expect(user1 == user3, isFalse); // Different values should not be equal
-      
+
       // Check props content
       expect(user1.props, contains(user1.uid));
       expect(user1.props, contains(user1.username));
@@ -215,7 +221,7 @@ void main() {
       expect(user.customFields, isNull);
       expect(user.person, isNull);
     });
-    
+
     test('should handle special cases with password fields', () {
       // Arrange
       final user = User(
@@ -225,15 +231,15 @@ void main() {
         password: 'securePassword',
         confirmPassword: 'securePassword',
       );
-      
+
       // Act
       final json = user.toJson();
       // Password fields should be included in JSON for API calls
-      
+
       // Assert
       expect(json['Password'], equals('securePassword'));
       expect(json['ConfirmPassword'], equals('securePassword'));
-      
+
       // When deserializing, password fields are not included in the response
       final responseJson = {
         'Uid': 'user-123',
@@ -241,7 +247,7 @@ void main() {
         'Email': 'john.doe@example.com',
         // No password fields
       };
-      
+
       final deserializedUser = User.fromJson(responseJson);
       expect(deserializedUser.password, isNull);
       expect(deserializedUser.confirmPassword, isNull);

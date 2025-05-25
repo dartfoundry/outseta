@@ -20,7 +20,8 @@ class Address extends BaseModel {
   });
 
   /// Factory constructor that creates an [Address] from JSON data
-  factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
 
   /// The first line of the address
   @JsonKey(name: 'AddressLine1')

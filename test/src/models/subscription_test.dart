@@ -25,11 +25,7 @@ void main() {
         'Total': 112.49,
         'Status': 'Canceled',
         'SubscriptionAddOns': [
-          {
-            'Name': 'Extra Storage',
-            'Quantity': 1,
-            'Amount': 10.0
-          }
+          {'Name': 'Extra Storage', 'Quantity': 1, 'Amount': 10.0},
         ],
         'PaymentMethod': 'CreditCard',
         'PlanName': 'Pro Plan',
@@ -44,8 +40,8 @@ void main() {
           'Description': 'Professional tier',
           'BillingTerm': 'Month',
           'BillingTermCount': 1,
-          'Amount': 99.99
-        }
+          'Amount': 99.99,
+        },
       };
 
       // Act
@@ -79,7 +75,7 @@ void main() {
       expect(subscription.updated, isA<DateTime>());
       expect(subscription.createdBy, equals('admin'));
       expect(subscription.updatedBy, equals('admin'));
-      
+
       // Check nested Plan object
       expect(subscription.plan, isNotNull);
       expect(subscription.plan?.uid, equals('plan-456'));
@@ -110,11 +106,7 @@ void main() {
         total: 112.49,
         status: 'Canceled',
         subscriptionAddOns: [
-          {
-            'Name': 'Extra Storage',
-            'Quantity': 1,
-            'Amount': 10.0
-          }
+          {'Name': 'Extra Storage', 'Quantity': 1, 'Amount': 10.0},
         ],
         paymentMethod: 'CreditCard',
         planName: 'Pro Plan',
@@ -164,7 +156,7 @@ void main() {
       expect(json['Updated'], isA<String>());
       expect(json['CreatedBy'], equals('admin'));
       expect(json['UpdatedBy'], equals('admin'));
-      
+
       // Check nested Plan object
       expect(json['Plan'], isNotNull);
       expect(json['Plan']['Uid'], equals('plan-456'));
@@ -193,13 +185,22 @@ void main() {
       // Assert
       expect(updatedSubscription.uid, equals('sub-123')); // Unchanged
       expect(updatedSubscription.planUid, equals('plan-456')); // Unchanged
-      expect(updatedSubscription.accountUid, equals('account-789')); // Unchanged
-      expect(updatedSubscription.billingRenewalTerm, equals('Month')); // Unchanged
+      expect(
+        updatedSubscription.accountUid,
+        equals('account-789'),
+      ); // Unchanged
+      expect(
+        updatedSubscription.billingRenewalTerm,
+        equals('Month'),
+      ); // Unchanged
       expect(updatedSubscription.status, equals('Canceled')); // Changed
-      expect(updatedSubscription.cancellationReason, equals('Changed plans')); // Added
+      expect(
+        updatedSubscription.cancellationReason,
+        equals('Changed plans'),
+      ); // Added
       expect(updatedSubscription.cancelDate, isA<DateTime>()); // Added
       expect(updatedSubscription.amount, equals(129.99)); // Changed
-      
+
       // Verify original is unchanged
       expect(subscription.status, equals('Active'));
       expect(subscription.cancellationReason, isNull);
@@ -214,13 +215,13 @@ void main() {
         planUid: 'plan-456',
         status: 'Active',
       );
-      
+
       final subscription2 = Subscription(
         uid: 'sub-123',
         planUid: 'plan-456',
         status: 'Active',
       );
-      
+
       final subscription3 = Subscription(
         uid: 'sub-123',
         planUid: 'plan-456',
@@ -228,9 +229,15 @@ void main() {
       );
 
       // Assert
-      expect(subscription1 == subscription2, isTrue); // Same values should be equal
-      expect(subscription1 == subscription3, isFalse); // Different values should not be equal
-      
+      expect(
+        subscription1 == subscription2,
+        isTrue,
+      ); // Same values should be equal
+      expect(
+        subscription1 == subscription3,
+        isFalse,
+      ); // Different values should not be equal
+
       // Check props content
       expect(subscription1.props, contains(subscription1.uid));
       expect(subscription1.props, contains(subscription1.planUid));
@@ -273,22 +280,19 @@ void main() {
       expect(subscription.customFields, isNull);
       expect(subscription.plan, isNull);
     });
-    
+
     test('should handle different subscription status values', () {
       // Test various status values
       final statuses = ['Active', 'Canceled', 'Trial', 'Past Due', 'Pending'];
-      
+
       for (final status in statuses) {
         // Arrange
-        final subscription = Subscription(
-          uid: 'sub-123',
-          status: status,
-        );
-        
+        final subscription = Subscription(uid: 'sub-123', status: status);
+
         // Act
         final json = subscription.toJson();
         final deserialized = Subscription.fromJson(json);
-        
+
         // Assert
         expect(deserialized.status, equals(status));
       }

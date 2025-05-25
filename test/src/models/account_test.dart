@@ -25,7 +25,7 @@ void main() {
           'City': 'San Francisco',
           'State': 'CA',
           'PostalCode': '94105',
-          'Country': 'USA'
+          'Country': 'USA',
         },
         'MailingAddress': {
           'Uid': 'addr-456',
@@ -33,36 +33,32 @@ void main() {
           'City': 'San Francisco',
           'State': 'CA',
           'PostalCode': '94105',
-          'Country': 'USA'
+          'Country': 'USA',
         },
         'PrimaryContact': {
           'Uid': 'person-123',
           'Email': 'contact@example.com',
           'FirstName': 'Jane',
           'LastName': 'Doe',
-          'Title': 'CEO'
+          'Title': 'CEO',
         },
         'People': [
           {
             'Uid': 'person-123',
             'Email': 'contact@example.com',
             'FirstName': 'Jane',
-            'LastName': 'Doe'
+            'LastName': 'Doe',
           },
           {
             'Uid': 'person-456',
             'Email': 'employee@example.com',
             'FirstName': 'John',
-            'LastName': 'Smith'
-          }
+            'LastName': 'Smith',
+          },
         ],
         'Subscriptions': [
-          {
-            'Uid': 'sub-123',
-            'PlanUid': 'plan-456',
-            'Status': 'Active'
-          }
-        ]
+          {'Uid': 'sub-123', 'PlanUid': 'plan-456', 'Status': 'Active'},
+        ],
       };
 
       // Act
@@ -76,7 +72,10 @@ void main() {
       expect(account.dealUid, equals('deal-789'));
       expect(account.planUid, equals('plan-456'));
       expect(account.cancellationReason, equals('Switched providers'));
-      expect(account.customFields, equals({'industry': 'Technology', 'size': 'Enterprise'}));
+      expect(
+        account.customFields,
+        equals({'industry': 'Technology', 'size': 'Enterprise'}),
+      );
       expect(account.created, isA<DateTime>());
       expect(account.updated, isA<DateTime>());
       expect(account.createdBy, equals('admin'));
@@ -90,15 +89,15 @@ void main() {
 
       expect(account.mailingAddress, isNotNull);
       expect(account.mailingAddress?.addressLine1, equals('456 Market St'));
-      
+
       expect(account.primaryContact, isNotNull);
       expect(account.primaryContact?.email, equals('contact@example.com'));
       expect(account.primaryContact?.firstName, equals('Jane'));
-      
+
       expect(account.people, isNotNull);
       expect(account.people?.length, equals(2));
       expect(account.people?[0].email, equals('contact@example.com'));
-      
+
       expect(account.subscriptions, isNotNull);
       expect(account.subscriptions?.length, equals(1));
       expect(account.subscriptions?[0].planUid, equals('plan-456'));
@@ -158,11 +157,7 @@ void main() {
           ),
         ],
         subscriptions: [
-          Subscription(
-            uid: 'sub-123',
-            planUid: 'plan-456',
-            status: 'Active',
-          ),
+          Subscription(uid: 'sub-123', planUid: 'plan-456', status: 'Active'),
         ],
       );
 
@@ -177,7 +172,10 @@ void main() {
       expect(json['DealUid'], equals('deal-789'));
       expect(json['PlanUid'], equals('plan-456'));
       expect(json['CancellationReason'], equals('Switched providers'));
-      expect(json['CustomFields'], equals({'industry': 'Technology', 'size': 'Enterprise'}));
+      expect(
+        json['CustomFields'],
+        equals({'industry': 'Technology', 'size': 'Enterprise'}),
+      );
       expect(json['Created'], isA<String>());
       expect(json['Updated'], isA<String>());
       expect(json['CreatedBy'], equals('admin'));
@@ -187,16 +185,16 @@ void main() {
       expect(json['BillingAddress'], isNotNull);
       expect(json['BillingAddress']['AddressLine1'], equals('123 Main St'));
       expect(json['BillingAddress']['AddressLine2'], equals('Suite 100'));
-      
+
       expect(json['MailingAddress'], isNotNull);
       expect(json['MailingAddress']['AddressLine1'], equals('456 Market St'));
-      
+
       expect(json['PrimaryContact'], isNotNull);
       expect(json['PrimaryContact']['Email'], equals('contact@example.com'));
-      
+
       expect(json['People'], isNotNull);
       expect(json['People'].length, equals(2));
-      
+
       expect(json['Subscriptions'], isNotNull);
       expect(json['Subscriptions'].length, equals(1));
     });
@@ -228,9 +226,15 @@ void main() {
       expect(updatedAccount.uid, equals('123-456-789')); // Unchanged
       expect(updatedAccount.name, equals('Updated Company')); // Changed
       expect(updatedAccount.phoneNumber, equals('555-987-6543')); // Changed
-      expect(updatedAccount.billingAddress?.addressLine1, equals('789 New Ave')); // Changed
-      expect(updatedAccount.customFields, equals({'industry': 'Healthcare'})); // Added
-      
+      expect(
+        updatedAccount.billingAddress?.addressLine1,
+        equals('789 New Ave'),
+      ); // Changed
+      expect(
+        updatedAccount.customFields,
+        equals({'industry': 'Healthcare'}),
+      ); // Added
+
       // Verify original is unchanged
       expect(account.name, equals('Test Company'));
       expect(account.phoneNumber, equals('555-123-4567'));
@@ -245,13 +249,13 @@ void main() {
         name: 'Test Company',
         phoneNumber: '555-123-4567',
       );
-      
+
       final account2 = Account(
         uid: '123',
         name: 'Test Company',
         phoneNumber: '555-123-4567',
       );
-      
+
       final account3 = Account(
         uid: '123',
         name: 'Different Company',
@@ -260,8 +264,11 @@ void main() {
 
       // Assert
       expect(account1 == account2, isTrue); // Same values should be equal
-      expect(account1 == account3, isFalse); // Different values should not be equal
-      
+      expect(
+        account1 == account3,
+        isFalse,
+      ); // Different values should not be equal
+
       // Check props content
       expect(account1.props, contains(account1.uid));
       expect(account1.props, contains(account1.name));

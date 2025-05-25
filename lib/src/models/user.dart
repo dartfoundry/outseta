@@ -148,21 +148,21 @@ class User extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        username,
-        email,
-        emailConfirmed,
-        firstName,
-        lastName,
-        phoneNumber,
-        personUid,
-        person,
-        profileImageS3Key,
-        lastLoggedInDate,
-        isAdmin,
-        password,
-        confirmPassword,
-        marketingConsent,
-        customFields,
-      ];
+    ...super.props,
+    username,
+    email,
+    emailConfirmed,
+    firstName,
+    lastName,
+    phoneNumber,
+    personUid,
+    person,
+    profileImageS3Key,
+    lastLoggedInDate,
+    isAdmin,
+    password,
+    confirmPassword,
+    marketingConsent,
+    customFields,
+  ];
 }

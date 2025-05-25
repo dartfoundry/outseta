@@ -20,14 +20,8 @@ void main() {
         'Updated': '2023-01-15T00:00:00Z',
         'CreatedBy': 'admin',
         'UpdatedBy': 'admin',
-        'Invoice': {
-          'Uid': 'inv-456',
-          'InvoiceNumber': 'INV-456',
-        },
-        'Account': {
-          'Uid': 'account-789',
-          'Name': 'Test Company',
-        },
+        'Invoice': {'Uid': 'inv-456', 'InvoiceNumber': 'INV-456'},
+        'Account': {'Uid': 'account-789', 'Name': 'Test Company'},
       };
 
       // Act
@@ -113,7 +107,7 @@ void main() {
       expect(updatedPayment.status, equals('Refunded')); // Changed
       expect(updatedPayment.refundAmount, equals(99.99)); // Added
       expect(updatedPayment.refundDate, isA<DateTime>()); // Added
-      
+
       // Verify original is unchanged
       expect(payment.status, equals('Completed'));
       expect(payment.refundAmount, equals(0.0));
@@ -128,14 +122,14 @@ void main() {
         amount: 99.99,
         status: 'Completed',
       );
-      
+
       final payment2 = Payment(
         uid: 'pay-123',
         invoiceUid: 'inv-456',
         amount: 99.99,
         status: 'Completed',
       );
-      
+
       final payment3 = Payment(
         uid: 'pay-123',
         invoiceUid: 'inv-456',
@@ -145,8 +139,11 @@ void main() {
 
       // Assert
       expect(payment1 == payment2, isTrue); // Same values should be equal
-      expect(payment1 == payment3, isFalse); // Different values should not be equal
-      
+      expect(
+        payment1 == payment3,
+        isFalse,
+      ); // Different values should not be equal
+
       // Check props content
       expect(payment1.props, contains(payment1.uid));
       expect(payment1.props, contains(payment1.invoiceUid));
@@ -179,11 +176,11 @@ void main() {
       expect(payment.invoice, isNull);
       expect(payment.account, isNull);
     });
-    
+
     test('should handle different payment status values', () {
       // Test various status values
       final statuses = ['Completed', 'Refunded', 'Failed', 'Pending'];
-      
+
       for (final status in statuses) {
         // Arrange
         final payment = Payment(
@@ -191,11 +188,11 @@ void main() {
           status: status,
           refundAmount: 0.0,
         );
-        
+
         // Act
         final json = payment.toJson();
         final deserialized = Payment.fromJson(json);
-        
+
         // Assert
         expect(deserialized.status, equals(status));
       }

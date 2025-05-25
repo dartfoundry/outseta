@@ -141,20 +141,20 @@ class Email extends BaseModelWithMetadata {
 
   @override
   List<Object?> get props => [
-        ...super.props,
-        subject,
-        fromName,
-        fromEmail,
-        replyToEmail,
-        content,
-        status,
-        scheduledDate,
-        sentDate,
-        openCount,
-        clickCount,
-        emailListUid,
-        emailList,
-        personSegmentUid,
-        customFields,
-      ];
+    ...super.props,
+    subject,
+    fromName,
+    fromEmail,
+    replyToEmail,
+    content,
+    status,
+    scheduledDate,
+    sentDate,
+    openCount,
+    clickCount,
+    emailListUid,
+    emailList,
+    personSegmentUid,
+    customFields,
+  ];
 }

@@ -14,7 +14,8 @@ class Pagination {
   });
 
   /// Factory constructor that creates a [Pagination] from JSON data
-  factory Pagination.fromJson(Map<String, dynamic> json) => _$PaginationFromJson(json);
+  factory Pagination.fromJson(Map<String, dynamic> json) =>
+      _$PaginationFromJson(json);
 
   /// The number of items in the current page
   @JsonKey(name: 'count')
@@ -40,17 +41,13 @@ class Pagination {
 @JsonSerializable(genericArgumentFactories: true)
 class PaginatedResponse<T> {
   /// Creates a new paginated response
-  const PaginatedResponse({
-    required this.items,
-    required this.metadata,
-  });
+  const PaginatedResponse({required this.items, required this.metadata});
 
   /// Factory constructor that creates a [PaginatedResponse] from JSON data
   factory PaginatedResponse.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) =>
-      _$PaginatedResponseFromJson(json, fromJsonT);
+  ) => _$PaginatedResponseFromJson(json, fromJsonT);
 
   /// The list of items in the current page
   @JsonKey(name: 'items')
