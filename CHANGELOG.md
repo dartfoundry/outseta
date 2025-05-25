@@ -1,3 +1,8 @@
+## 1.0.1
+
+- Fix dangling comments
+- Format code with dart formatter
+
 ## 1.0.0
 
 - Initial release of the Outseta Dart API client

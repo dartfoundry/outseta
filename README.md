@@ -38,7 +38,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  outseta: ^1.0.0
+  outseta: ^1.0.1
 ```
 
 Then run:

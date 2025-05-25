@@ -1,6 +1,6 @@
 name: outseta
 description: API client for projects using the Outseta membership operating system.
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/dartfoundry/outseta
 
 environment:
