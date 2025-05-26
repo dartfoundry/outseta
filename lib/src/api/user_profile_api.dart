@@ -1,4 +1,4 @@
-import '../models/user.dart';
+import '../models/profile.dart';
 import '../outseta_client.dart';
 
 /// The User Profile API client for managing user profiles
@@ -9,15 +9,15 @@ class UserProfileApi {
   final OutsetaClient _client;
 
   /// Get the current user's profile
-  Future<User> getCurrentUser() async {
+  Future<Profile> getCurrentUser() async {
     final response = await _client.get('profile/user');
-    return User.fromJson(response);
+    return Profile.fromJson(response);
   }
 
   /// Update the current user's profile
-  Future<User> updateCurrentUser(User user) async {
-    final response = await _client.put('profile/user', body: user.toJson());
-    return User.fromJson(response);
+  Future<Profile> updateCurrentUser(Profile profile) async {
+    final response = await _client.put('profile/user', body: profile.toJson());
+    return Profile.fromJson(response);
   }
 
   /// Change the current user's password
@@ -83,11 +83,11 @@ class UserProfileApi {
   }
 
   /// Update the user's profile picture
-  Future<User> updateProfilePicture(String base64Image) async {
+  Future<Profile> updateProfilePicture(String base64Image) async {
     final response = await _client.post(
       'profile/user/update-profile-picture',
       body: {'ProfileImage': base64Image},
     );
-    return User.fromJson(response);
+    return Profile.fromJson(response);
   }
 }

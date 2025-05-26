@@ -1212,7 +1212,7 @@ void main() {
 
     test('updateCurrentUser should update the user profile', () async {
       // Arrange
-      final user = User(firstName: 'Updated', lastName: 'User');
+      final profile = Profile(firstName: 'Updated', lastName: 'User');
 
       final responseData = {
         'Uid': '123',
@@ -1231,7 +1231,7 @@ void main() {
       ).thenAnswer((_) async => http.Response(jsonEncode(responseData), 200));
 
       // Act
-      final result = await userProfileApi.updateCurrentUser(user);
+      final result = await userProfileApi.updateCurrentUser(profile);
 
       // Assert
       expect(result.uid, equals('123'));

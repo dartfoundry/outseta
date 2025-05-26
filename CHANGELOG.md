@@ -1,3 +1,13 @@
+## 2.0.0
+
+**BREAKING CHANGES:**
+- Renamed `User` model to `Profile` throughout the codebase
+- Renamed `user.dart` and `user.g.dart` files to `profile.dart` and `profile.g.dart`
+- Updated `UserProfileApi` class to use `Profile` instead of `User`
+- All methods in `UserProfileApi` now return `Profile` objects instead of `User` objects
+- Import statements must be updated from `import 'package:outseta/src/models/user.dart'` to `import 'package:outseta/src/models/profile.dart'`
+- Variable declarations using `User` type must be changed to `Profile`
+
 ## 1.0.1
 
 - Fix dangling comments

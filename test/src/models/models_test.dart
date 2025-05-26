@@ -407,7 +407,7 @@ void main() {
     });
   });
 
-  group('User', () {
+  group('Profile', () {
     test('fromJson should correctly parse JSON', () {
       // Arrange
       final json = {
@@ -423,23 +423,23 @@ void main() {
       };
 
       // Act
-      final user = User.fromJson(json);
+      final profile = Profile.fromJson(json);
 
       // Assert
-      expect(user.uid, equals('123'));
-      expect(user.email, equals('user@example.com'));
-      expect(user.firstName, equals('Test'));
-      expect(user.lastName, equals('User'));
+      expect(profile.uid, equals('123'));
+      expect(profile.email, equals('user@example.com'));
+      expect(profile.firstName, equals('Test'));
+      expect(profile.lastName, equals('User'));
 
-      expect(user.emailConfirmed, isTrue);
-      expect(user.profileImageS3Key, equals('profile/image.jpg'));
-      expect(user.created, isA<DateTime>());
-      expect(user.updated, isA<DateTime>());
+      expect(profile.emailConfirmed, isTrue);
+      expect(profile.profileImageS3Key, equals('profile/image.jpg'));
+      expect(profile.created, isA<DateTime>());
+      expect(profile.updated, isA<DateTime>());
     });
 
     test('toJson should correctly serialize to JSON', () {
       // Arrange
-      final user = User(
+      final profile = Profile(
         uid: '123',
         email: 'user@example.com',
         firstName: 'Test',
@@ -452,7 +452,7 @@ void main() {
       );
 
       // Act
-      final json = user.toJson();
+      final json = profile.toJson();
 
       // Assert
       expect(json['Uid'], equals('123'));
@@ -468,7 +468,7 @@ void main() {
 
     test('copyWith should return a new instance with updated values', () {
       // Arrange
-      final user = User(
+      final profile = Profile(
         uid: '123',
         email: 'user@example.com',
         firstName: 'Test',
@@ -476,19 +476,19 @@ void main() {
       );
 
       // Act
-      final updatedUser = user.copyWith(
+      final updatedProfile = profile.copyWith(
         firstName: 'Updated',
         profileImageS3Key: 'profile/new-image.jpg',
       );
 
       // Assert
-      expect(updatedUser.uid, equals('123'));
-      expect(updatedUser.email, equals('user@example.com'));
-      expect(updatedUser.firstName, equals('Updated'));
-      expect(updatedUser.lastName, equals('User'));
-      expect(updatedUser.profileImageS3Key, equals('profile/new-image.jpg'));
-      expect(user.firstName, equals('Test')); // Original unchanged
-      expect(user.profileImageS3Key, isNull); // Original unchanged
+      expect(updatedProfile.uid, equals('123'));
+      expect(updatedProfile.email, equals('user@example.com'));
+      expect(updatedProfile.firstName, equals('Updated'));
+      expect(updatedProfile.lastName, equals('User'));
+      expect(updatedProfile.profileImageS3Key, equals('profile/new-image.jpg'));
+      expect(profile.firstName, equals('Test')); // Original unchanged
+      expect(profile.profileImageS3Key, isNull); // Original unchanged
     });
   });
 }

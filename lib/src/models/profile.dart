@@ -3,13 +3,13 @@ import 'package:json_annotation/json_annotation.dart';
 import 'base_model.dart';
 import 'person.dart';
 
-part 'user.g.dart';
+part 'profile.g.dart';
 
-/// User model representing a user profile in the Outseta API
+/// Profile model representing a user profile in the Outseta API
 @JsonSerializable()
-class User extends BaseModelWithMetadata {
-  /// Creates a new User instance
-  const User({
+class Profile extends BaseModelWithMetadata {
+  /// Creates a new Profile instance
+  const Profile({
     super.uid,
     super.created,
     super.updated,
@@ -32,8 +32,8 @@ class User extends BaseModelWithMetadata {
     this.customFields,
   });
 
-  /// Factory constructor that creates a [User] from JSON data
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  /// Factory constructor that creates a [Profile] from JSON data
+  factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
 
   /// The username of the user
   @JsonKey(name: 'Username')
@@ -95,12 +95,12 @@ class User extends BaseModelWithMetadata {
   @JsonKey(name: 'CustomFields')
   final Map<String, dynamic>? customFields;
 
-  /// Converts this user instance to a JSON map
+  /// Converts this profile instance to a JSON map
   @override
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  Map<String, dynamic> toJson() => _$ProfileToJson(this);
 
-  /// Creates a copy of this user with the given fields replaced with new values
-  User copyWith({
+  /// Creates a copy of this profile with the given fields replaced with new values
+  Profile copyWith({
     String? uid,
     DateTime? created,
     DateTime? updated,
@@ -122,7 +122,7 @@ class User extends BaseModelWithMetadata {
     bool? marketingConsent,
     Map<String, dynamic>? customFields,
   }) {
-    return User(
+    return Profile(
       uid: uid ?? this.uid,
       created: created ?? this.created,
       updated: updated ?? this.updated,

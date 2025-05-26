@@ -10,7 +10,7 @@ export 'plan.dart';
 export 'email.dart';
 export 'list.dart';
 export 'ticket.dart';
-export 'user.dart';
+export 'profile.dart';
 export 'metadata.dart';
 export 'pagination.dart';
 

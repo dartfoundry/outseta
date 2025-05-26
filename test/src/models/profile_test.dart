@@ -2,7 +2,7 @@ import 'package:outseta/outseta.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('User', () {
+  group('Profile', () {
     test('fromJson should correctly parse JSON', () {
       // Arrange
       final json = {
@@ -32,38 +32,38 @@ void main() {
       };
 
       // Act
-      final user = User.fromJson(json);
+      final profile = Profile.fromJson(json);
 
       // Assert
-      expect(user.uid, equals('user-123'));
-      expect(user.username, equals('johndoe'));
-      expect(user.email, equals('john.doe@example.com'));
-      expect(user.emailConfirmed, isTrue);
-      expect(user.firstName, equals('John'));
-      expect(user.lastName, equals('Doe'));
-      expect(user.phoneNumber, equals('555-123-4567'));
-      expect(user.personUid, equals('person-456'));
-      expect(user.profileImageS3Key, equals('profiles/johndoe.jpg'));
-      expect(user.lastLoggedInDate, isA<DateTime>());
-      expect(user.isAdmin, isFalse);
-      expect(user.marketingConsent, isTrue);
+      expect(profile.uid, equals('user-123'));
+      expect(profile.username, equals('johndoe'));
+      expect(profile.email, equals('john.doe@example.com'));
+      expect(profile.emailConfirmed, isTrue);
+      expect(profile.firstName, equals('John'));
+      expect(profile.lastName, equals('Doe'));
+      expect(profile.phoneNumber, equals('555-123-4567'));
+      expect(profile.personUid, equals('person-456'));
+      expect(profile.profileImageS3Key, equals('profiles/johndoe.jpg'));
+      expect(profile.lastLoggedInDate, isA<DateTime>());
+      expect(profile.isAdmin, isFalse);
+      expect(profile.marketingConsent, isTrue);
       expect(
-        user.customFields,
+        profile.customFields,
         equals({'department': 'Sales', 'employeeId': '12345'}),
       );
-      expect(user.created, isA<DateTime>());
-      expect(user.updated, isA<DateTime>());
-      expect(user.createdBy, equals('admin'));
-      expect(user.updatedBy, equals('admin'));
-      expect(user.person, isNotNull);
-      expect(user.person?.email, equals('john.doe@example.com'));
-      expect(user.person?.firstName, equals('John'));
-      expect(user.person?.lastName, equals('Doe'));
+      expect(profile.created, isA<DateTime>());
+      expect(profile.updated, isA<DateTime>());
+      expect(profile.createdBy, equals('admin'));
+      expect(profile.updatedBy, equals('admin'));
+      expect(profile.person, isNotNull);
+      expect(profile.person?.email, equals('john.doe@example.com'));
+      expect(profile.person?.firstName, equals('John'));
+      expect(profile.person?.lastName, equals('Doe'));
     });
 
     test('toJson should correctly serialize to JSON', () {
       // Arrange
-      final user = User(
+      final profile = Profile(
         uid: 'user-123',
         username: 'johndoe',
         email: 'john.doe@example.com',
@@ -92,7 +92,7 @@ void main() {
       );
 
       // Act
-      final json = user.toJson();
+      final json = profile.toJson();
 
       // Assert
       expect(json['Uid'], equals('user-123'));
@@ -122,7 +122,7 @@ void main() {
 
     test('copyWith should return a new instance with updated values', () {
       // Arrange
-      final user = User(
+      final profile = Profile(
         uid: 'user-123',
         username: 'johndoe',
         email: 'john.doe@example.com',
@@ -131,7 +131,7 @@ void main() {
       );
 
       // Act
-      final updatedUser = user.copyWith(
+      final updatedProfile = profile.copyWith(
         firstName: 'Jonathan',
         lastName: 'Smith',
         phoneNumber: '555-987-6543',
@@ -139,24 +139,24 @@ void main() {
       );
 
       // Assert
-      expect(updatedUser.uid, equals('user-123')); // Unchanged
-      expect(updatedUser.username, equals('johndoe')); // Unchanged
-      expect(updatedUser.email, equals('john.doe@example.com')); // Unchanged
-      expect(updatedUser.firstName, equals('Jonathan')); // Changed
-      expect(updatedUser.lastName, equals('Smith')); // Changed
-      expect(updatedUser.phoneNumber, equals('555-987-6543')); // Added
-      expect(updatedUser.isAdmin, isTrue); // Added
+      expect(updatedProfile.uid, equals('user-123')); // Unchanged
+      expect(updatedProfile.username, equals('johndoe')); // Unchanged
+      expect(updatedProfile.email, equals('john.doe@example.com')); // Unchanged
+      expect(updatedProfile.firstName, equals('Jonathan')); // Changed
+      expect(updatedProfile.lastName, equals('Smith')); // Changed
+      expect(updatedProfile.phoneNumber, equals('555-987-6543')); // Added
+      expect(updatedProfile.isAdmin, isTrue); // Added
 
       // Verify original is unchanged
-      expect(user.firstName, equals('John'));
-      expect(user.lastName, equals('Doe'));
-      expect(user.phoneNumber, isNull);
-      expect(user.isAdmin, isNull);
+      expect(profile.firstName, equals('John'));
+      expect(profile.lastName, equals('Doe'));
+      expect(profile.phoneNumber, isNull);
+      expect(profile.isAdmin, isNull);
     });
 
     test('props should include all properties for comparison', () {
       // Arrange
-      final user1 = User(
+      final profile1 = Profile(
         uid: 'user-123',
         username: 'johndoe',
         email: 'john.doe@example.com',
@@ -164,7 +164,7 @@ void main() {
         lastName: 'Doe',
       );
 
-      final user2 = User(
+      final profile2 = Profile(
         uid: 'user-123',
         username: 'johndoe',
         email: 'john.doe@example.com',
@@ -172,7 +172,7 @@ void main() {
         lastName: 'Doe',
       );
 
-      final user3 = User(
+      final profile3 = Profile(
         uid: 'user-123',
         username: 'johndoe',
         email: 'john.doe@example.com',
@@ -181,15 +181,15 @@ void main() {
       );
 
       // Assert
-      expect(user1 == user2, isTrue); // Same values should be equal
-      expect(user1 == user3, isFalse); // Different values should not be equal
+      expect(profile1 == profile2, isTrue); // Same values should be equal
+      expect(profile1 == profile3, isFalse); // Different values should not be equal
 
       // Check props content
-      expect(user1.props, contains(user1.uid));
-      expect(user1.props, contains(user1.username));
-      expect(user1.props, contains(user1.email));
-      expect(user1.props, contains(user1.firstName));
-      expect(user1.props, contains(user1.lastName));
+      expect(profile1.props, contains(profile1.uid));
+      expect(profile1.props, contains(profile1.username));
+      expect(profile1.props, contains(profile1.email));
+      expect(profile1.props, contains(profile1.firstName));
+      expect(profile1.props, contains(profile1.lastName));
     });
 
     test('should handle null values in JSON', () {
@@ -201,30 +201,30 @@ void main() {
       };
 
       // Act
-      final user = User.fromJson(json);
+      final profile = Profile.fromJson(json);
 
       // Assert
-      expect(user.uid, equals('user-123'));
-      expect(user.username, equals('johndoe'));
-      expect(user.email, isNull);
-      expect(user.emailConfirmed, isNull);
-      expect(user.firstName, isNull);
-      expect(user.lastName, isNull);
-      expect(user.phoneNumber, isNull);
-      expect(user.personUid, isNull);
-      expect(user.profileImageS3Key, isNull);
-      expect(user.lastLoggedInDate, isNull);
-      expect(user.isAdmin, isNull);
-      expect(user.password, isNull);
-      expect(user.confirmPassword, isNull);
-      expect(user.marketingConsent, isNull);
-      expect(user.customFields, isNull);
-      expect(user.person, isNull);
+      expect(profile.uid, equals('user-123'));
+      expect(profile.username, equals('johndoe'));
+      expect(profile.email, isNull);
+      expect(profile.emailConfirmed, isNull);
+      expect(profile.firstName, isNull);
+      expect(profile.lastName, isNull);
+      expect(profile.phoneNumber, isNull);
+      expect(profile.personUid, isNull);
+      expect(profile.profileImageS3Key, isNull);
+      expect(profile.lastLoggedInDate, isNull);
+      expect(profile.isAdmin, isNull);
+      expect(profile.password, isNull);
+      expect(profile.confirmPassword, isNull);
+      expect(profile.marketingConsent, isNull);
+      expect(profile.customFields, isNull);
+      expect(profile.person, isNull);
     });
 
     test('should handle special cases with password fields', () {
       // Arrange
-      final user = User(
+      final profile = Profile(
         uid: 'user-123',
         username: 'johndoe',
         email: 'john.doe@example.com',
@@ -233,7 +233,7 @@ void main() {
       );
 
       // Act
-      final json = user.toJson();
+      final json = profile.toJson();
       // Password fields should be included in JSON for API calls
 
       // Assert
@@ -248,9 +248,9 @@ void main() {
         // No password fields
       };
 
-      final deserializedUser = User.fromJson(responseJson);
-      expect(deserializedUser.password, isNull);
-      expect(deserializedUser.confirmPassword, isNull);
+      final deserializedProfile = Profile.fromJson(responseJson);
+      expect(deserializedProfile.password, isNull);
+      expect(deserializedProfile.confirmPassword, isNull);
     });
   });
 }

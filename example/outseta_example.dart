@@ -132,9 +132,9 @@ void main() async {
     // Example: Get current user (requires authentication)
     try {
       print('\nAttempting to get current user profile...');
-      final currentUser = await client.userProfile.getCurrentUser();
+      final currentProfile = await client.userProfile.getCurrentUser();
       print(
-        'Current user: ${currentUser.email} (${currentUser.firstName} ${currentUser.lastName})',
+        'Current user: ${currentProfile.email} (${currentProfile.firstName} ${currentProfile.lastName})',
       );
     } catch (e) {
       print('Error getting current user: $e');

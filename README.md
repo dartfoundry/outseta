@@ -4,8 +4,17 @@
 
 A comprehensive Dart API client for the [Outseta.com](https://www.outseta.com?via=dartfoundry) REST API V1. This library provides a type-safe interface to interact with all Outseta API endpoints including CRM, Billing, Marketing, and Support functions.
 
+## 🚨 Breaking Changes in v2.0.0
+
+The `User` model has been renamed to `Profile` throughout the codebase. If you're upgrading from v1.x, you'll need to:
+- Update import statements from `User` to `Profile`
+- Change variable declarations from `User` to `Profile`
+- Update method calls that returned `User` objects to expect `Profile` objects
+
 [![pub package](https://img.shields.io/pub/v/outseta.svg)](https://pub.dev/packages/outseta)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+The change reflects the official Outseta API more accurately. The refactoring maintains 100% functional compatibility - only the naming has changed. All existing functionality, JSON serialization/deserialization, API endpoints, and behavior remain exactly the same.
 
 ## Features
 
@@ -30,7 +39,7 @@ You can read the accompanying article at [DartFoundry.com](https://dartfoundry.c
 | **Billing** | Subscription and payment management | `getPlans()`, `createSubscription()`, `getInvoice()` | `Plan`, `Subscription`, `Invoice`, `Payment` |
 | **Marketing** | Email campaigns and lists | `getLists()`, `createEmail()`, `addSubscriber()` | `EmailList`, `Email` |
 | **Support** | Help desk and tickets | `getTickets()`, `addComment()`, `changeStatus()` | `Ticket` |
-| **User Profile** | User authentication and profile | `getCurrentUser()`, `updateProfilePicture()`, `changePassword()` | `User` |
+| **User Profile** | User authentication and profile | `getCurrentUser()`, `updateProfilePicture()`, `changePassword()` | `Profile` |
 
 ## Getting Started
 
@@ -38,7 +47,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  outseta: ^1.0.1
+  outseta: ^2.0.0
 ```
 
 Then run:
@@ -181,14 +190,14 @@ print('Found ${assignedTickets.metadata.total} assigned tickets');
 
 ```dart
 // Get the current user's profile
-final currentUser = await client.userProfile.getCurrentUser();
-print('Logged in as: ${currentUser.email}');
+final currentProfile = await client.userProfile.getCurrentUser();
+print('Logged in as: ${currentProfile.email}');
 
 // Update a user's profile
-final updatedUser = currentUser.copyWith(
+final updatedProfile = currentProfile.copyWith(
   firstName: 'New First Name',
 );
-await client.userProfile.updateCurrentUser(updatedUser);
+await client.userProfile.updateCurrentUser(updatedProfile);
 
 // Change a user's password
 await client.userProfile.changePassword(
@@ -339,7 +348,7 @@ try {
 | Method | Description | Parameters |
 |--------|-------------|------------|
 | `getCurrentUser()` | Get the current user's profile | none |
-| `updateCurrentUser()` | Update the current user's profile | `user` |
+| `updateCurrentUser()` | Update the current user's profile | `profile` |
 | `changePassword()` | Change the current user's password | `currentPassword`, `newPassword`, `confirmPassword` |
 | `requestPasswordReset()` | Request a password reset for a user | `email` |
 | `resetPassword()` | Reset a user's password using a token | `token`, `newPassword`, `confirmPassword` |

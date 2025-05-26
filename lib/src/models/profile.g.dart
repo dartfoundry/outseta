@@ -2,17 +2,17 @@
 
 // ignore_for_file: unnecessary_this, sort_constructors_first, prefer_single_quotes, lines_longer_than_80_chars
 
-part of 'user.dart';
+part of 'profile.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) => $checkedCreate(
-  'User',
+Profile _$ProfileFromJson(Map<String, dynamic> json) => $checkedCreate(
+  'Profile',
   json,
   ($checkedConvert) {
-    final val = User(
+    final val = Profile(
       uid: $checkedConvert('Uid', (v) => v as String?),
       created: $checkedConvert(
         'Created',
@@ -78,7 +78,7 @@ User _$UserFromJson(Map<String, dynamic> json) => $checkedCreate(
   },
 );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
   if (instance.uid case final value?) 'Uid': value,
   if (instance.created?.toIso8601String() case final value?) 'Created': value,
   if (instance.updated?.toIso8601String() case final value?) 'Updated': value,
